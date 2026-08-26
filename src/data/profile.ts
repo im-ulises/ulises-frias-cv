@@ -2,7 +2,7 @@ export const profile = {
   name: 'Ulises Frías',
   email: 'hello@ulisesfrias.com',
   github: 'https://github.com/im-ulises',
-  linkedin: 'https://www.linkedin.com/in/ulises-frias/',
+  linkedin: 'https://www.linkedin.com/in/ulises-fr%C3%ADas-8a7790172/',
   location: 'Mexico · English / Spanish',
   status: 'Open to global AI deployment roles',
 };
