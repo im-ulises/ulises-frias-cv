@@ -11,19 +11,96 @@ function Header() {
     ? [['#work', 'Work'], ['#experience', 'Experience'], ['#about', 'About']]
     : [['/', 'Home'], ['/#work', 'Work'], ['/#experience', 'Experience']];
 
-  return <header className="site-header">
-    <Link className="wordmark" to="/" onClick={() => setOpen(false)}>ULISES FRÍAS<span className="dot">.</span></Link>
-    <button className="menu-button" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} onClick={() => setOpen(!open)}>{open ? <X size={20}/> : <Menu size={20}/>}</button>
-    <nav className={open ? 'nav open' : 'nav'}>
-      {links.map(([href, label]) => href.startsWith('#')
-        ? <a key={href} href={href} onClick={() => setOpen(false)}>{label}</a>
-        : <Link key={href} to={href} onClick={() => setOpen(false)}>{label}</Link>)}
-      <a href={profile.github} target="_blank" rel="noreferrer">GitHub <ArrowUpRight size={12}/></a>
-      <a href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn <ArrowUpRight size={12}/></a>
-      <Link className="nav-cv" to="/resume" onClick={() => setOpen(false)}>Download CV <Download size={13}/></Link>
-      <a href={`mailto:${profile.email}`} onClick={() => setOpen(false)}>Contact <ArrowUpRight size={12}/></a>
-    </nav>
-  </header>;
+  return <>
+    <style>{`
+      .header-right { display:flex; align-items:center; gap:22px; }
+      .availability-pill {
+        position:relative;
+        display:inline-flex;
+        align-items:center;
+        gap:9px;
+        min-height:36px;
+        padding:0 13px;
+        border:1px solid rgba(17,17,17,.16);
+        border-radius:999px;
+        background:rgba(244,243,239,.72);
+        color:#292a27;
+        font-size:10px;
+        font-weight:600;
+        letter-spacing:.09em;
+        white-space:nowrap;
+        backdrop-filter:blur(12px);
+        transition:border-color .25s ease, background .25s ease, transform .25s ease;
+        animation:availability-enter .65s cubic-bezier(.22,1,.36,1) .25s both;
+      }
+      .availability-pill:hover {
+        border-color:rgba(17,17,17,.34);
+        background:rgba(255,255,255,.48);
+        transform:translateY(-1px);
+      }
+      .availability-light {
+        position:relative;
+        width:8px;
+        height:8px;
+        flex:0 0 8px;
+        border-radius:50%;
+        background:#23c968;
+        box-shadow:0 0 0 1px rgba(35,201,104,.18), 0 0 8px rgba(35,201,104,.55);
+      }
+      .availability-light::after {
+        content:'';
+        position:absolute;
+        inset:-5px;
+        border:1px solid rgba(35,201,104,.5);
+        border-radius:50%;
+        animation:availability-pulse 2.2s cubic-bezier(.2,.7,.2,1) infinite;
+      }
+      @keyframes availability-enter {
+        from { opacity:0; transform:translateY(-7px) scale(.97); filter:blur(3px); }
+        to { opacity:1; transform:translateY(0) scale(1); filter:blur(0); }
+      }
+      @keyframes availability-pulse {
+        0% { opacity:.8; transform:scale(.55); }
+        65%,100% { opacity:0; transform:scale(1.45); }
+      }
+      @media (max-width:980px) and (min-width:761px) {
+        .availability-pill { padding:0 10px; }
+        .availability-label { display:none; }
+      }
+      @media (max-width:760px) {
+        .header-right { gap:10px; }
+        .availability-pill { min-height:32px; padding:0 10px; font-size:9px; }
+        .availability-label { display:inline; }
+      }
+      @media (max-width:430px) {
+        .availability-pill { padding:0 9px; }
+        .availability-label { display:none; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .availability-pill { animation:none; }
+        .availability-light::after { animation:none; opacity:.35; }
+      }
+    `}</style>
+    <header className="site-header">
+      <Link className="wordmark" to="/" onClick={() => setOpen(false)}>ULISES FRÍAS<span className="dot">.</span></Link>
+      <div className="header-right">
+        <nav className={open ? 'nav open' : 'nav'}>
+          {links.map(([href, label]) => href.startsWith('#')
+            ? <a key={href} href={href} onClick={() => setOpen(false)}>{label}</a>
+            : <Link key={href} to={href} onClick={() => setOpen(false)}>{label}</Link>)}
+          <a href={profile.github} target="_blank" rel="noreferrer">GitHub <ArrowUpRight size={12}/></a>
+          <a href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn <ArrowUpRight size={12}/></a>
+          <Link className="nav-cv" to="/resume" onClick={() => setOpen(false)}>Download CV <Download size={13}/></Link>
+          <a href={`mailto:${profile.email}`} onClick={() => setOpen(false)}>Contact <ArrowUpRight size={12}/></a>
+        </nav>
+        <a className="availability-pill" href={onHome ? '#contact' : '/#contact'} aria-label="Available for work — go to contact section">
+          <span className="availability-light" aria-hidden="true" />
+          <span className="availability-label">AVAILABLE FOR WORK</span>
+        </a>
+        <button className="menu-button" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} onClick={() => setOpen(!open)}>{open ? <X size={20}/> : <Menu size={20}/>}</button>
+      </div>
+    </header>
+  </>;
 }
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
@@ -196,7 +273,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="contact section-pad" aria-labelledby="contact-title">
+      <section id="contact" className="contact section-pad" aria-labelledby="contact-title">
         <div className="contact-top"><Eyebrow>LET'S TALK</Eyebrow><span className="section-number">10 / 10</span></div>
         <h2 id="contact-title">Building AI that survives contact with the real world <em>interests me.</em></h2>
         <p>Open to conversations around AI Deployment, Deployment Strategy, Forward Deployed Engineering, Solutions Engineering and agentic systems.</p>
