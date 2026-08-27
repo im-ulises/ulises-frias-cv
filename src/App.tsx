@@ -39,13 +39,17 @@ function Header() {
       .resume-bullets li { position:relative; padding-left:12px; font-size:10px; line-height:1.35; color:#555652; }
       .resume-bullets li::before { content:'–'; position:absolute; left:0; color:#1769ff; }
       .resume-signal-label { display:block; font-size:8px; letter-spacing:.1em; color:#7b7c78; margin-bottom:5px; }
+      .resume-selected .resume-item h3 { margin-bottom:4px; }
+      .resume-selected .resume-work-title { color:#111; font-weight:500; margin-bottom:7px; }
+      .resume-selected .resume-work-body { font-size:10px; line-height:1.35; color:#555652; }
+      .resume-selected .resume-bullets { margin-top:7px; }
       .resume-earlier { border-top:1px solid #111; margin-top:28px; padding-top:15px; }
-      .resume-earlier-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+      .resume-earlier-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:28px; }
       .resume-earlier-item { border-top:1px solid #d7d5ce; padding-top:10px; }
       .resume-earlier-item h3 { font-size:14px; font-weight:500; margin:0 0 3px; }
       .resume-earlier-item .resume-role { font-size:10px; color:#111; margin:0 0 6px; }
       .resume-earlier-item p { font-size:10px; line-height:1.35; color:#6f706d; margin:0; }
-      .resume-skills-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+      .resume-skills-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
       .resume-skill-group h3 { font-size:9px; letter-spacing:.1em; margin:0 0 6px; }
       .resume-skill-group p { font-size:10px; line-height:1.45; color:#555652; }
       @keyframes availability-enter { from { opacity:0; transform:translateY(-7px) scale(.97); filter:blur(3px); } to { opacity:1; transform:translateY(0) scale(1); filter:blur(0); } }
@@ -57,12 +61,33 @@ function Header() {
       }
       @media (max-width:430px) { .availability-pill { padding:0 9px; } .availability-label { display:none; } }
       @media print {
-        .resume-bullets li { font-size:8.8px; }
-        .resume-earlier { margin-top:18px; padding-top:10px; }
-        .resume-earlier-grid { gap:18px; }
-        .resume-earlier-item h3 { font-size:12px; }
-        .resume-earlier-item .resume-role,.resume-earlier-item p,.resume-skill-group p { font-size:8.5px; }
-        .resume-skills-grid { gap:16px; }
+        @page { size:A4; margin:10mm 11mm; }
+        body { background:#fff !important; }
+        .site-header,.resume-actions { display:none !important; }
+        .resume-page { max-width:none !important; min-height:0 !important; padding:0 !important; margin:0 !important; background:#fff !important; }
+        .resume-header h1 { font-size:42px !important; margin:10px 0 5px !important; }
+        .resume-position { font-size:10px !important; margin:0 !important; }
+        .resume-contact { font-size:7.8px !important; line-height:1.42 !important; }
+        .resume-rule { margin:14px 0 10px !important; }
+        .resume-summary { grid-template-columns:21% 1fr !important; gap:12px !important; }
+        .resume-summary p { font-size:10.5px !important; line-height:1.2 !important; max-width:none !important; }
+        .resume-columns { grid-template-columns:1fr 1fr !important; gap:22px !important; margin-top:18px !important; }
+        .resume-page h2 { font-size:7.5px !important; margin-bottom:7px !important; }
+        .resume-item { padding:7px 0 8px !important; break-inside:avoid; }
+        .resume-item h3 { font-size:12px !important; margin-bottom:2px !important; }
+        .resume-item p,.resume-selected .resume-work-body { font-size:7.8px !important; line-height:1.28 !important; }
+        .resume-signal-label,.resume-date { font-size:6.7px !important; margin-bottom:4px !important; }
+        .resume-bullets { gap:2px !important; margin-top:4px !important; }
+        .resume-bullets li { font-size:7px !important; line-height:1.22 !important; padding-left:9px !important; }
+        .resume-earlier { margin-top:12px !important; padding-top:7px !important; }
+        .resume-earlier-grid { gap:14px !important; }
+        .resume-earlier-item { padding-top:6px !important; break-inside:avoid; }
+        .resume-earlier-item h3 { font-size:9.5px !important; }
+        .resume-earlier-item .resume-role,.resume-earlier-item p { font-size:7px !important; line-height:1.22 !important; }
+        .resume-skills { margin-top:12px !important; padding-top:7px !important; }
+        .resume-skills-grid { grid-template-columns:repeat(4,1fr) !important; gap:10px !important; }
+        .resume-skill-group h3 { font-size:6.8px !important; margin-bottom:3px !important; }
+        .resume-skill-group p { font-size:6.8px !important; line-height:1.28 !important; }
       }
       @media (prefers-reduced-motion: reduce) { .availability-pill { animation:none; } .availability-light::after { animation:none; opacity:.35; } }
     `}</style>
@@ -103,6 +128,7 @@ function Home() {
   const displayedSignals = es ? signalsEs : signals;
   const displayedExperience = es ? experienceEs : experience;
   const displayedSkills = es ? skillsEs : skills;
+
   useEffect(() => {
     const observer = new IntersectionObserver(entries => entries.forEach(entry => entry.isIntersecting && entry.target.classList.add('is-visible')), { threshold: 0.12 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
@@ -113,30 +139,30 @@ function Home() {
     <Header />
     <main>
       <section className="hero section-pad" aria-labelledby="hero-title">
-        <div className="hero-meta"><Eyebrow>{es ? 'IMPLEMENTACIÓN DE IA · SISTEMAS AGÉNTICOS · PRODUCTO' : 'AI DEPLOYMENT · AGENTIC SYSTEMS · PRODUCT'}</Eyebrow><span className="hero-index">01 / 10</span></div>
+        <div className="hero-meta"><Eyebrow>{es ? 'IMPLEMENTACIÓN DE IA · SISTEMAS AGÉNTICOS · PRODUCTO' : 'AI DEPLOYMENT · AGENTIC SYSTEMS · PRODUCT'}</Eyebrow><span className="hero-index">01 / 11</span></div>
         <div className="hero-grid">
-          <h1 id="hero-title">{es ? <>Construyo sistemas de IA que convierten <em>problemas de negocio</em> en workflows implementados.</> : <>I build AI systems that turn <em>business problems</em> into deployed workflows.</>}</h1>
+          <h1 id="hero-title">{es ? <>Convierto <em>problemas ambiguos de negocio</em> en sistemas de IA implementables.</> : <>I turn <em>ambiguous business problems</em> into implementable AI systems.</>}</h1>
           <div className="hero-aside">
-            <figure className="hero-portrait"><img src="/ulises-portrait.jpg" alt="Ulises Frías" loading="eager" width="1600" height="900" /><figcaption>{es ? 'ULISES FRÍAS / CONSTRUCTOR DE IA' : 'ULISES FRÍAS / AI BUILDER'}</figcaption></figure>
+            <figure className="hero-portrait"><img src="/ulises-portrait.jpg" alt="Ulises Frías" loading="eager" width="1600" height="900" /><figcaption>{es ? 'ULISES FRÍAS / AI DEPLOYMENT' : 'ULISES FRÍAS / AI DEPLOYMENT'}</figcaption></figure>
             <p className="hero-kicker">{es ? <>Constructor · Operador<br/>Frente al cliente</> : <>Builder · Operator<br/>Customer-facing</>}</p>
-            <p className="hero-copy">{es ? 'Soy un constructor de IA basado en México que trabaja entre agentes autónomos, producto y deployment con clientes.' : 'I’m a Mexico-based AI builder working across autonomous agents, product and customer deployment.'}</p>
-            <p className="hero-copy">{es ? 'Construyo sistemas técnicos y trabajo directamente con empresas para convertir problemas ambiguos en workflows de IA listos para producción.' : 'I build technical systems and work directly with businesses to turn ambiguous problems into production-ready AI workflows.'}</p>
+            <p className="hero-copy">{es ? 'Constructor de AI deployment y fundador trabajando en la intersección entre problemas del cliente, sistemas técnicos y producto.' : 'AI deployment builder and founder working at the intersection of customer problems, technical systems and product.'}</p>
+            <p className="hero-copy">{es ? 'Trabajo directamente con empresas para convertir necesidades operativas ambiguas en workflows implementables: desde discovery y mapeo hasta diseño de solución, prototipado y entrega.' : 'I work directly with businesses to turn ambiguous operational needs into implementable AI workflows — from discovery and workflow mapping through solution design, prototyping and delivery.'}</p>
           </div>
         </div>
         <div className="hero-footer">
           <p>{es ? 'México · Inglés / Español' : profile.location}<br/>{es ? 'Disponible para roles globales de implementación de IA' : profile.status}</p>
           <div className="hero-actions">
             <a className="button button-dark" href="#work">{es ? 'Ver trabajo seleccionado' : 'View selected work'} <ArrowDownRight size={16}/></a>
-            <Link className="button button-light" to="/resume">{es ? 'Descargar currículum' : 'Download résumé'} <Download size={15}/></Link>
+            <Link className="button button-light" to="/resume">{es ? 'Ver / guardar CV' : 'View / save résumé'} <Download size={15}/></Link>
           </div>
         </div>
       </section>
 
       <section id="work" className="signals section-pad section-rule" aria-labelledby="signals-title">
-        <div className="section-heading"><Eyebrow>{es ? 'SEÑALES SELECCIONADAS' : 'SELECTED SIGNALS'}</Eyebrow><span className="section-number">02 / 10</span></div>
+        <div className="section-heading"><Eyebrow>{es ? 'TRABAJO SELECCIONADO' : 'SELECTED WORK'}</Eyebrow><span className="section-number">02 / 11</span></div>
         <div className="signals-intro">
-          <h2 id="signals-title">{es ? <>Constructor.<br/><span>Operador.</span><br/>Frente al cliente.</> : <>Builder.<br/><span>Operator.</span><br/>Customer-facing.</>}</h2>
-          <p>{es ? 'Una combinación útil cuando el problema aún no está claro, el sistema todavía evoluciona y alguien debe hacerse cargo del camino entre la idea y un deployment funcional.' : 'A useful combination when the problem is still unclear, the system is still evolving, and someone has to own the path from idea to working deployment.'}</p>
+          <h2 id="signals-title">{es ? <>Diagnosticar.<br/><span>Entregar.</span><br/>Construir.</> : <>Diagnose.<br/><span>Deliver.</span><br/>Build.</>}</h2>
+          <p>{es ? 'La secuencia es intencional: entender la operación, convertir requerimientos reales en entrega, construir sistemas, hacerse cargo del cliente y habilitar a los usuarios.' : 'The sequence is intentional: understand the operation, turn real requirements into delivery, build systems, own the customer, and enable users.'}</p>
         </div>
         <div className="signal-list">
           {displayedSignals.map(signal => <Reveal className="signal" key={signal.name}>
@@ -149,80 +175,97 @@ function Home() {
         </div>
       </section>
 
-      <section className="case-study section-pad section-rule" aria-labelledby="crobi-title">
-        <div className="section-heading"><Eyebrow>{es ? 'CASO DESTACADO / 01' : 'FEATURED CASE STUDY / 01'}</Eyebrow><span className="section-number">03 / 10</span></div>
+      <section className="case-study section-pad section-rule" aria-labelledby="bosur-title">
+        <div className="section-heading"><Eyebrow>{es ? 'CASO DESTACADO / 01' : 'FEATURED CASE STUDY / 01'}</Eyebrow><span className="section-number">03 / 11</span></div>
         <div className="case-header">
-          <h2 id="crobi-title">Crobi<span className="dot">.</span></h2>
-          <p>{es ? 'Explorando cómo operar trabajo autónomo de IA con control, trazabilidad y supervisión humana.' : 'Exploring how autonomous AI work can operate with control, traceability and human oversight.'}</p>
+          <h2 id="bosur-title">BOSUR<span className="dot">.</span></h2>
+          <p>{es ? 'Diagnosticar el negocio antes de decidir qué construir.' : 'Diagnose the business before deciding what to build.'}</p>
         </div>
         <div className="case-layout">
           <div className="case-statement">
-            <Eyebrow>{es ? 'EL PROBLEMA' : 'THE PROBLEM'}</Eyebrow>
-            <p>{es ? 'Las empresas quieren agentes autónomos, pero llevarlos a producción introduce permisos, memoria, herramientas, fallos, aprobaciones, auditoría y complejidad de infraestructura.' : 'Companies want autonomous agents, but production deployment introduces permissions, memory, tools, failures, approvals, audit and infrastructure complexity.'}</p>
-            <div className="case-role"><span>{es ? 'MI ROL' : 'MY ROLE'}</span><strong>{es ? 'Constructor de sistemas de IA / I+D independiente' : 'AI Systems Builder / Independent R&D'}</strong></div>
+            <Eyebrow>{es ? 'FASE 0 PAGADA' : 'PAID PHASE 0'}</Eyebrow>
+            <p>{es ? 'El trabajo fue convertir una operación industrial basada en formatos, cumplimiento y procesos distribuidos en un alcance técnico coherente para una plataforma futura.' : 'The work was to turn an industrial operation built around forms, compliance and distributed processes into a coherent technical scope for a future platform.'}</p>
+            <div className="case-role"><span>{es ? 'ALCANCE' : 'SCOPE'}</span><strong>{es ? 'Discovery con cliente → mapeo de workflows → arquitectura de solución → alcance de implementación' : 'Customer discovery → workflow mapping → solution architecture → implementation scope'}</strong></div>
           </div>
           <div className="architecture">
-            <Eyebrow>{es ? 'PLANO DE CONTROL / ARQUITECTURA' : 'CONTROL PLANE / ARCHITECTURE'}</Eyebrow>
+            <Eyebrow>{es ? 'DE OPERACIÓN A ARQUITECTURA' : 'OPERATION TO ARCHITECTURE'}</Eyebrow>
             <div className="arch-stack">
-              {(es ? ['Usuario / Chief', 'Plano de control', 'Agentes · Workflows · Políticas', 'Workers', 'Herramientas · MCP · APIs', 'Evidencia · Memoria · Auditoría', 'Aprobaciones / Resultados'] : ['User / Chief', 'Control Plane', 'Agents · Workflows · Policies', 'Workers', 'Tools · MCP · APIs', 'Evidence · Memory · Audit', 'Approvals / Results']).map((item, i) =>
+              {(es ? ['33 formatos fuente', 'Clasificación funcional', '~8 módulos', '~18–20 workflows', 'Experiencia tablet-first', 'Datos · Alertas · IoT', 'Capa agéntica / alcance'] : ['33 source forms', 'Functional classification', '~8 modules', '~18–20 workflows', 'Tablet-first experience', 'Data · Alerts · IoT', 'Agentic layer / scope']).map((item, i) =>
                 <div key={item} className={`arch-node node-${i}`}><span>0{i + 1}</span>{item}</div>,
               )}
             </div>
           </div>
         </div>
         <div className="case-bottom">
-          <div><Eyebrow>{es ? 'EL ENFOQUE' : 'THE APPROACH'}</Eyebrow><p>{es ? 'Construir una capa de control que separe la intención del usuario de la ejecución gobernada.' : 'Build a control layer that separates user intent from governed execution.'}</p></div>
-          <div><Eyebrow>{es ? 'ETAPA ACTUAL' : 'CURRENT STAGE'}</Eyebrow><p>{es ? 'Sistema funcional en investigación y desarrollo independiente.' : 'Working system under active independent R&D.'}</p></div>
-          <div className="case-links"><span className="muted-link">{es ? 'La arquitectura técnica y los detalles de implementación están disponibles durante el proceso de entrevista.' : 'Technical architecture and implementation details available during the interview process.'}</span></div>
+          <div><Eyebrow>{es ? 'EVIDENCIA' : 'EVIDENCE'}</Eyebrow><p>{es ? '33 formatos operativos y de compliance revisados y clasificados funcionalmente.' : '33 operational and compliance forms reviewed and functionally classified.'}</p></div>
+          <div><Eyebrow>{es ? 'SOLUCIÓN PROPUESTA' : 'PROPOSED SOLUTION'}</Eyebrow><p>{es ? 'Arquitectura tablet-first con datos estructurados, evidencia de auditoría, alertas, IoT de temperatura y una capa agéntica.' : 'Tablet-first architecture with structured data, audit evidence, alerts, IoT temperature sensing and an agentic layer.'}</p></div>
+          <div className="case-links"><strong>{es ? 'La implementación todavía no se presenta como completada.' : 'Implementation is not yet claimed.'}</strong></div>
         </div>
       </section>
 
       <section className="split-section section-pad section-rule" aria-labelledby="real-world-title">
-        <div className="section-heading"><Eyebrow>{es ? 'TRABAJO EN CAMPO / 02' : 'FIELD WORK / 02'}</Eyebrow><span className="section-number">04 / 10</span></div>
+        <div className="section-heading"><Eyebrow>{es ? 'ENTREGA / 02' : 'DELIVERY / 02'}</Eyebrow><span className="section-number">04 / 11</span></div>
         <div className="split-grid">
-          <div className="split-title"><h2 id="real-world-title">{es ? 'IA en un entorno comercial real.' : 'AI in a real commercial environment.'}</h2></div>
+          <div className="split-title"><h2 id="real-world-title">{es ? 'IA dentro de trabajo comercial real.' : 'AI inside real commercial work.'}</h2></div>
           <div className="split-copy">
-            <p className="lead">{es ? <>Problema del cliente <span>→</span> diseño de solución <span>→</span> workflow de IA <span>→</span> producción <span>→</span> entrega.</> : <>Customer problem <span>→</span> solution design <span>→</span> AI workflow <span>→</span> production <span>→</span> delivery.</>}</p>
-            <p>{es ? 'En Big Media, Ciudad Juárez, trabajo dentro de una empresa líder de medios exteriores y digitales donde la IA debe responder a expectativas reales de clientes, fechas límite y restricciones de producción.' : 'At Big Media in Ciudad Juárez, I work inside a leading out-of-home and digital media business where AI has to survive real client expectations, deadlines and production constraints.'}</p>
-            <p>{es ? 'Colaboro con clientes, ventas, equipos creativos y producción para convertir ideas poco definidas en soluciones ejecutables impulsadas por IA.' : 'I collaborate across customer, sales, creative and production contexts to turn loosely defined ideas into executable AI-powered solutions.'}</p>
+            <p className="lead">{es ? <>Requerimiento <span>→</span> viabilidad <span>→</span> workflow <span>→</span> producción <span>→</span> entrega.</> : <>Requirement <span>→</span> feasibility <span>→</span> workflow <span>→</span> production <span>→</span> delivery.</>}</p>
+            <p>{es ? 'En Big Media trabajo entre contexto comercial, creativo y de producción. El punto de partida no es “usar una herramienta de IA”, sino entender qué necesita la campaña, qué esperan los stakeholders y qué puede ejecutarse de forma realista.' : 'At Big Media I work across commercial, creative and production contexts. The starting point is not “use an AI tool”; it is understanding what the campaign needs, what stakeholders expect and what can realistically be executed.'}</p>
+            <p>{es ? 'Convierto esos requerimientos en workflows de IA técnicamente viables y trabajo dentro de restricciones reales de producción y deadlines de entrega.' : 'I translate those requirements into technically feasible AI workflows and work within real production constraints and delivery deadlines.'}</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="split-section section-pad section-rule" aria-labelledby="crobi-title">
+        <div className="section-heading"><Eyebrow>{es ? 'CONSTRUCCIÓN / 03' : 'BUILD / 03'}</Eyebrow><span className="section-number">05 / 11</span></div>
+        <div className="split-grid">
+          <div className="split-title"><h2 id="crobi-title">{es ? 'También puedo construir el sistema.' : 'I can build the system, too.'}</h2></div>
+          <div className="split-copy">
+            <p className="lead">Crobi — {es ? 'I+D independiente en sistemas agénticos.' : 'independent R&D in agentic systems.'}</p>
+            <p>{es ? 'Crobi es un sistema que estoy construyendo con Python, FastAPI y APIs REST para coordinar workflows de agentes y ejecución de workers. Conecta herramientas mediante APIs y MCP, mantiene memoria y agrega puntos explícitos de control humano.' : 'Crobi is a system I am building with Python, FastAPI and REST APIs to coordinate agent workflows and worker execution. It connects tools through APIs and MCP, maintains memory and adds explicit human control points.'}</p>
+            <div className="mini-list">
+              <span>01 / {es ? 'Orquestación de agentes · ejecución de workers' : 'Agent orchestration · worker execution'}</span>
+              <span>02 / {es ? 'Tool calling · APIs · MCP · memoria' : 'Tool calling · APIs · MCP · memory'}</span>
+              <span>03 / {es ? 'Aprobaciones humanas · permisos' : 'Human approvals · permissions'}</span>
+              <span>04 / {es ? 'Ejecución trazable para trabajo autónomo controlado' : 'Traceable execution for controlled autonomous work'}</span>
+            </div>
           </div>
         </div>
       </section>
 
       <section className="split-section founder section-pad section-rule" aria-labelledby="founder-title">
-        <div className="section-heading"><Eyebrow>{es ? 'RESPONSABILIDAD / 03' : 'OWNERSHIP / 03'}</Eyebrow><span className="section-number">05 / 10</span></div>
+        <div className="section-heading"><Eyebrow>{es ? 'RESPONSABILIDAD / 04' : 'OWNERSHIP / 04'}</Eyebrow><span className="section-number">06 / 11</span></div>
         <div className="split-grid">
-          <div className="split-title"><h2 id="founder-title">{es ? 'Responsabilidad de fundador.' : 'Founder-level ownership.'}</h2></div>
+          <div className="split-title"><h2 id="founder-title">{es ? 'Hacerse cargo del cliente.' : 'Own the customer.'}</h2></div>
           <div className="split-copy">
-            <p className="lead">{es ? 'El trabajo no es solo construir. Es entender qué vale la pena construir.' : 'The job is not only to build. It is to understand what is worth building.'}</p>
-            <p>{es ? 'En EVO Studios he trabajado en el ciclo completo del cliente: encontrar el problema, entender la necesidad de negocio, vender la solución, decidir qué es técnicamente viable, construir y entregar el resultado.' : 'At EVO Studios, I’ve worked across the complete customer loop: find the problem, understand the business need, sell the solution, decide what is technically feasible, build the work and deliver the outcome.'}</p>
+            <p className="lead">{es ? 'Antes de AI deployment, hubo años de discovery, scoping, conversaciones comerciales y entrega.' : 'Before AI deployment, there were years of discovery, scoping, commercial conversations and delivery.'}</p>
+            <p>{es ? 'Cofundé EVO Studios como una productora y empresa de publicidad. Durante años trabajé directamente con clientes desde el brief y la conversación comercial hasta el alcance, la ejecución y la entrega. Más adelante, la empresa evolucionó hacia workflows impulsados por IA, implementación y educación.' : 'I co-founded EVO Studios as a production and advertising company. For years I worked directly with customers from brief and commercial conversation through scoping, execution and delivery. The company later evolved toward AI-powered workflows, implementation and education.'}</p>
             <div className="mini-list">
-              <span>01 / {es ? 'Descubrimiento de clientes' : 'Customer discovery'}</span>
-              <span>02 / {es ? 'Diseño de soluciones' : 'Solution design'}</span>
-              <span>03 / {es ? 'Desarrollo de workflows de IA' : 'AI workflow development'}</span>
-              <span>04 / {es ? 'Comunicación con clientes' : 'Client communication'}</span>
+              <span>01 / {es ? 'Discovery con clientes' : 'Customer discovery'}</span>
+              <span>02 / {es ? 'Conversaciones comerciales' : 'Commercial conversations'}</span>
+              <span>03 / {es ? 'Scoping y viabilidad' : 'Scoping and feasibility'}</span>
+              <span>04 / {es ? 'Entrega de punta a punta' : 'End-to-end delivery'}</span>
             </div>
           </div>
         </div>
       </section>
 
       <section className="speaking section-pad section-rule" aria-labelledby="speaking-title">
-        <div className="section-heading"><Eyebrow>{es ? 'COMUNICACIÓN / 04' : 'COMMUNICATION / 04'}</Eyebrow><span className="section-number">06 / 10</span></div>
+        <div className="section-heading"><Eyebrow>{es ? 'ENABLEMENT / 05' : 'ENABLEMENT / 05'}</Eyebrow><span className="section-number">07 / 11</span></div>
         <div className="speaking-grid">
-          <h2 id="speaking-title">{es ? <>Explicar la IA es parte de <em>construir IA.</em></> : <>Explaining AI is part of <em>building AI.</em></>}</h2>
+          <h2 id="speaking-title">{es ? <>Hacer la IA <em>utilizable</em> también es deployment.</> : <>Making AI <em>usable</em> is part of deployment.</>}</h2>
           <div>
-            <p>{es ? 'He impartido charlas de Cinematic AI y talleres prácticos para mostrar a profesionales cómo la tecnología generativa emergente se traduce en workflows reales de producción.' : 'I’ve delivered live Cinematic AI talks and practical workshops showing professionals how emerging generative AI technology translates into real production workflows.'}</p>
-            <p>{es ? 'El objetivo no es impresionar con herramientas. Es hacer que la tecnología compleja sea lo suficientemente clara para usarla.' : 'The goal is not to impress people with tools. It is to make complex technology understandable enough to use.'}</p>
-            <div className="attendee"><strong>40+</strong><span>{es ? <>asistentes en<br/>sesiones en vivo</> : <>attendees across<br/>live sessions</>}</span></div>
+            <p>{es ? 'EVO AI Campus / Cinematic AI reunió a 40 dueños de negocio en Ciudad Juárez en una sesión pagada de aproximadamente US$150 por asistente.' : 'EVO AI Campus / Cinematic AI brought 40 business owners together in Ciudad Juárez for a paid live session at approximately US$150 per attendee.'}</p>
+            <p>{es ? 'La sesión se enfocó en workflows prácticos de IA generativa: explicar tecnología emergente de forma suficientemente clara para que otras personas puedan aplicarla.' : 'The session focused on practical generative AI workflows: making emerging technology clear enough for other people to apply it.'}</p>
+            <div className="attendee"><strong>40</strong><span>{es ? <>dueños de negocio<br/>sesión pagada en vivo</> : <>business owners<br/>paid live session</>}</span></div>
           </div>
         </div>
       </section>
 
       <section id="experience" className="experience section-pad section-rule" aria-labelledby="experience-title">
-        <div className="section-heading"><Eyebrow>{es ? 'EXPERIENCIA' : 'EXPERIENCE'}</Eyebrow><span className="section-number">07 / 10</span></div>
+        <div className="section-heading"><Eyebrow>{es ? 'EXPERIENCIA' : 'EXPERIENCE'}</Eyebrow><span className="section-number">08 / 11</span></div>
         <div className="experience-heading">
           <h2 id="experience-title">{es ? <>Un camino construido<br/>alrededor de la <em>responsabilidad.</em></> : <>A path built<br/>around <em>ownership.</em></>}</h2>
-          <p>{es ? 'Desde producción y branding hasta productos, clientes y sistemas de IA: el patrón ha sido entender el problema y llevarlo hasta una entrega real.' : 'From production and branding to products, customers and AI systems, the recurring pattern has been understanding the problem and carrying it through to real delivery.'}</p>
+          <p>{es ? 'Desde producción y clientes hasta producto y sistemas de IA: el patrón ha sido entender el problema, definir una solución viable y llevarla a una entrega concreta.' : 'From production and customers to product and AI systems, the recurring pattern has been understanding the problem, defining a viable solution and carrying it through to concrete delivery.'}</p>
         </div>
         <div className="timeline">
           {displayedExperience.map(item => <Reveal className="timeline-item" key={`${item.company}-${item.year}`}>
@@ -238,10 +281,10 @@ function Home() {
       </section>
 
       <section className="capabilities section-pad section-rule" aria-labelledby="capabilities-title">
-        <div className="section-heading"><Eyebrow>{es ? 'CAPACIDADES' : 'CAPABILITIES'}</Eyebrow><span className="section-number">08 / 10</span></div>
+        <div className="section-heading"><Eyebrow>{es ? 'CAPACIDADES' : 'CAPABILITIES'}</Eyebrow><span className="section-number">09 / 11</span></div>
         <div className="capabilities-head">
-          <h2 id="capabilities-title">{es ? <>La combinación<br/><em>útil.</em></> : <>The useful<br/><em>combination.</em></>}</h2>
-          <p>{es ? 'Fluidez técnica, criterio de producto, empatía con el cliente y la capacidad de convertir la incertidumbre en un plan ejecutable.' : 'Technical fluency, product judgment, customer empathy and the ability to turn uncertainty into an executable plan.'}</p>
+          <h2 id="capabilities-title">{es ? <>Técnico.<br/><em>Customer-facing.</em></> : <>Technical.<br/><em>Customer-facing.</em></>}</h2>
+          <p>{es ? 'Fluidez técnica suficiente para prototipar e integrar; experiencia de cliente suficiente para descubrir, estructurar y comunicar qué vale la pena construir.' : 'Enough technical fluency to prototype and integrate; enough customer experience to discover, structure and communicate what is worth building.'}</p>
         </div>
         <div className="skill-grid">
           {Object.entries(displayedSkills).map(([group, items]) => <div className="skill-group" key={group}>
@@ -252,24 +295,24 @@ function Home() {
       </section>
 
       <section id="about" className="about section-pad section-rule" aria-labelledby="about-title">
-        <div className="section-heading"><Eyebrow>{es ? 'POSICIONAMIENTO' : 'POSITIONING'}</Eyebrow><span className="section-number">09 / 10</span></div>
+        <div className="section-heading"><Eyebrow>{es ? 'POSICIONAMIENTO' : 'POSITIONING'}</Eyebrow><span className="section-number">10 / 11</span></div>
         <div className="about-grid">
-          <h2 id="about-title">{es ? 'Suelo estar entre quienes definen el problema y quienes construyen el sistema.' : 'I tend to sit between the people defining the problem and the people building the system.'}</h2>
+          <h2 id="about-title">{es ? 'Trabajo entre quienes viven el problema y quienes construyen el sistema.' : 'I work between the people living the problem and the people building the system.'}</h2>
           <div>
-            <p>{es ? 'Me gusta tomar requerimientos de negocio desordenados, entender qué se necesita realmente, determinar qué puede resolver la IA de forma realista y convertirlo en algo que funcione.' : 'I enjoy taking messy business requirements, understanding what is actually needed, determining what AI can realistically solve, and turning that into something that works.'}</p>
-            <p>{es ? 'Mi experiencia cruza emprendimiento, producto, trabajo con clientes, sistemas de IA y tecnología creativa. Por eso el deployment con clientes me resulta especialmente interesante.' : 'My background crosses entrepreneurship, product, customer work, AI systems and creative technology. That combination is why forward deployment is particularly interesting to me.'}</p>
+            <p>{es ? 'Mi trabajo empieza con contexto: qué hace realmente el negocio, dónde se rompe el workflow, qué necesita el usuario y qué resultado importa. Después viene la arquitectura, el prototipo y la entrega.' : 'My work starts with context: what the business actually does, where the workflow breaks, what the user needs and what outcome matters. Then come architecture, prototyping and delivery.'}</p>
+            <p>{es ? 'Mi experiencia cruza emprendimiento, producto, trabajo con clientes, sistemas de IA y tecnología creativa. Esa combinación es la razón por la que AI deployment, Deployment Strategy y Solutions Engineering encajan de forma natural.' : 'My background crosses entrepreneurship, product, customer work, AI systems and creative technology. That combination is why AI Deployment, Deployment Strategy and Solutions Engineering are a natural fit.'}</p>
           </div>
         </div>
       </section>
 
       <section id="contact" className="contact section-pad" aria-labelledby="contact-title">
-        <div className="contact-top"><Eyebrow>{es ? 'HABLEMOS' : "LET'S TALK"}</Eyebrow><span className="section-number">10 / 10</span></div>
-        <h2 id="contact-title">{es ? <>Me interesa construir IA que sobreviva el contacto con el <em>mundo real.</em></> : <>Building AI that survives contact with the real world <em>interests me.</em></>}</h2>
-        <p>{es ? 'Abierto a conversaciones sobre implementación de IA, estrategia de deployment, Forward Deployed Engineering, Solutions Engineering y sistemas agénticos.' : 'Open to conversations around AI Deployment, Deployment Strategy, Forward Deployed Engineering, Solutions Engineering and agentic systems.'}</p>
+        <div className="contact-top"><Eyebrow>{es ? 'HABLEMOS' : "LET'S TALK"}</Eyebrow><span className="section-number">11 / 11</span></div>
+        <h2 id="contact-title">{es ? <>Del problema ambiguo al <em>plan técnico ejecutable.</em></> : <>From ambiguous problem to <em>executable technical plan.</em></>}</h2>
+        <p>{es ? 'Abierto a conversaciones sobre AI Deployment, Deployment Strategy, Enterprise Solutions, Forward Deployed Engineering y sistemas agénticos.' : 'Open to conversations around AI Deployment, Deployment Strategy, Enterprise Solutions, Forward Deployed Engineering and agentic systems.'}</p>
         <div className="contact-actions">
           <a className="button button-dark" href={`mailto:${profile.email}`}>{es ? 'Escribir a Ulises' : 'Email Ulises'} <Mail size={16}/></a>
           <a className="button button-light" href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn <ArrowUpRight size={16}/></a>
-          <Link className="button button-light" to="/resume">{es ? 'Descargar CV' : 'Download CV'} <Download size={15}/></Link>
+          <Link className="button button-light" to="/resume">{es ? 'Ver / guardar CV' : 'View / save CV'} <Download size={15}/></Link>
         </div>
       </section>
     </main>
@@ -283,15 +326,16 @@ function Resume() {
   const displayedSignals = es ? signalsEs : signals;
   const displayedExperience = es ? experienceEs : experience;
   const displayedSkills = es ? skillsEs : skills;
-  const currentExperience = displayedExperience.slice(0, 4);
-  const earlierExperience = displayedExperience.slice(4);
+  const primaryWork = displayedSignals.slice(0, 3);
+  const currentExperience = displayedExperience.slice(0, 3);
+  const earlierExperience = displayedExperience.slice(3);
 
   return <>
     <Header/>
     <main className="resume-page">
       <div className="resume-actions">
         <Link to="/">← {es ? 'Volver al sitio' : 'Back to site'}</Link>
-        <button onClick={() => window.print()}><Download size={14}/> {es ? 'Imprimir / Guardar PDF' : 'Print / Save PDF'}</button>
+        <button onClick={() => window.print()} title={es ? 'Abrir el diálogo de impresión para guardar como PDF' : 'Open the print dialog to save as PDF'}><Download size={14}/> {es ? 'Imprimir / Guardar PDF' : 'Print / Save PDF'}</button>
       </div>
       <section className="resume-header">
         <div>
@@ -309,16 +353,18 @@ function Resume() {
       </section>
       <div className="resume-rule"/>
       <section className="resume-summary">
-        <h2>{es ? 'Posicionamiento' : 'Positioning'}</h2>
-        <p>{es ? 'Construyo sistemas de IA que convierten problemas de negocio ambiguos en workflows implementados. Mi experiencia cruza clientes, producto, operación, tecnología y entrega en producción.' : 'I build AI systems that turn ambiguous business problems into deployed workflows. My background spans customer work, product, operations, technical systems and production delivery.'}</p>
+        <h2>{es ? 'Perfil' : 'Profile'}</h2>
+        <p>{es ? 'Constructor de AI deployment y fundador trabajando entre problemas del cliente, sistemas técnicos y producto. Trabajo directamente con empresas para convertir necesidades operativas ambiguas en workflows implementables, desde discovery y mapeo hasta diseño de solución, prototipado y entrega.' : 'AI deployment builder and founder working at the intersection of customer problems, technical systems and product. I work directly with businesses to turn ambiguous operational needs into implementable AI workflows, from discovery and workflow mapping through solution design, prototyping and delivery.'}</p>
       </section>
       <div className="resume-columns">
-        <section>
+        <section className="resume-selected">
           <h2>{es ? 'Trabajo seleccionado' : 'Selected work'}</h2>
-          {displayedSignals.map(s => <div className="resume-item" key={s.name}>
-            <span className="resume-signal-label">{s.label}</span>
+          {primaryWork.map(s => <div className="resume-item" key={s.name}>
+            <span className="resume-signal-label">{s.number} · {s.label}</span>
             <h3>{s.name}</h3>
-            <p>{s.title}</p>
+            <p className="resume-work-title">{s.title}</p>
+            <p className="resume-work-body">{s.body}</p>
+            <ul className="resume-bullets">{s.proof.map(item => <li key={item}>{item}</li>)}</ul>
           </div>)}
         </section>
         <section>
@@ -348,7 +394,7 @@ function Resume() {
       <section className="resume-skills">
         <h2>{es ? 'Capacidades principales' : 'Core capabilities'}</h2>
         <div className="resume-skills-grid">
-          {Object.entries(displayedSkills).slice(0, 3).map(([group, items]) => <div className="resume-skill-group" key={group}>
+          {Object.entries(displayedSkills).map(([group, items]) => <div className="resume-skill-group" key={group}>
             <h3>{group}</h3>
             <p>{items.join(' · ')}</p>
           </div>)}
@@ -379,6 +425,18 @@ export default function App() {
     document.documentElement.lang = language;
     window.localStorage.setItem('ulises-language', language);
   }, [language]);
+
+  useEffect(() => {
+    const onResume = location.pathname === '/resume';
+    const title = onResume
+      ? `Ulises Frías — ${language === 'es' ? 'CV · AI Deployment' : 'Résumé · AI Deployment'}`
+      : 'Ulises Frías — AI Deployment · Agentic Systems · Product';
+    const description = language === 'es'
+      ? 'Constructor de AI deployment y fundador: customer discovery, workflow mapping, arquitectura de soluciones, sistemas agénticos y entrega customer-facing.'
+      : 'AI deployment builder and founder: customer discovery, workflow mapping, solution architecture, agentic systems and customer-facing delivery.';
+    document.title = title;
+    document.querySelector('meta[name="description"]')?.setAttribute('content', description);
+  }, [language, location.pathname]);
 
   return <LanguageContext.Provider value={{ language, setLanguage }}>
     {location.pathname === '/resume' ? <Resume/> : <Home/>}
