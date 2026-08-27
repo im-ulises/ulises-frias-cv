@@ -129,6 +129,7 @@ function Home() {
         <div className="hero-grid">
           <h1 id="hero-title">I build AI systems that turn <em>business problems</em> into deployed workflows.</h1>
           <div className="hero-aside">
+            <figure className="hero-portrait"><img src="/ulises-portrait.jpg" alt="Ulises Frías" loading="eager" width="1600" height="900" /><figcaption>ULISES FRÍAS / AI BUILDER</figcaption></figure>
             <p className="hero-kicker">Builder · Operator<br/>Customer-facing</p>
             <p className="hero-copy">I’m a Mexico-based AI builder working across autonomous agents, product and customer deployment.</p>
             <p className="hero-copy">I build technical systems and work directly with businesses to turn ambiguous problems into production-ready AI workflows.</p>
@@ -140,6 +141,7 @@ function Home() {
             <a className="button button-dark" href="#work">View selected work <ArrowDownRight size={16}/></a>
             <Link className="button button-light" to="/resume">Download résumé <Download size={15}/></Link>
           </div>
+
         </div>
       </section>
 
