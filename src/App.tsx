@@ -1,15 +1,20 @@
-import { useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { ArrowDownRight, ArrowUpRight, Check, Download, Mail, Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { experience, profile, signals, skills } from './data/profile';
 
+type Language = 'en' | 'es';
+const LanguageContext = createContext<{ language: Language; setLanguage: (language: Language) => void }>({ language: 'en', setLanguage: () => undefined });
+const useLanguage = () => useContext(LanguageContext);
+
 function Header() {
   const [open, setOpen] = useState(false);
+  const { language, setLanguage } = useLanguage();
   const location = useLocation();
   const onHome = location.pathname === '/';
   const links = onHome
-    ? [['#work', 'Work'], ['#experience', 'Experience'], ['#about', 'About']]
-    : [['/', 'Home'], ['/#work', 'Work'], ['/#experience', 'Experience']];
+    ? [['#work', language === 'en' ? 'Work' : 'Trabajo'], ['#experience', language === 'en' ? 'Experience' : 'Experiencia'], ['#about', language === 'en' ? 'About' : 'Sobre mí']]
+    : [['/', language === 'en' ? 'Home' : 'Inicio'], ['/#work', language === 'en' ? 'Work' : 'Trabajo'], ['/#experience', language === 'en' ? 'Experience' : 'Experiencia']];
 
   return <>
     <style>{`
@@ -90,13 +95,14 @@ function Header() {
             : <Link key={href} to={href} onClick={() => setOpen(false)}>{label}</Link>)}
           <a href={profile.github} target="_blank" rel="noreferrer">GitHub <ArrowUpRight size={12}/></a>
           <a href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn <ArrowUpRight size={12}/></a>
-          <Link className="nav-cv" to="/resume" onClick={() => setOpen(false)}>Download CV <Download size={13}/></Link>
-          <a href={`mailto:${profile.email}`} onClick={() => setOpen(false)}>Contact <ArrowUpRight size={12}/></a>
+          <Link className="nav-cv" to="/resume" onClick={() => setOpen(false)}>{language === 'en' ? 'Download CV' : 'Descargar CV'} <Download size={13}/></Link>
+          <a href={`mailto:${profile.email}`} onClick={() => setOpen(false)}>{language === 'en' ? 'Contact' : 'Contacto'} <ArrowUpRight size={12}/></a>
         </nav>
-        <a className="availability-pill" href={onHome ? '#contact' : '/#contact'} aria-label="Available for work — go to contact section">
+        <a className="availability-pill" href={onHome ? '#contact' : '/#contact'} aria-label={language === 'en' ? 'Available for work — go to contact section' : 'Disponible para trabajar — ir a contacto'}>
           <span className="availability-light" aria-hidden="true" />
-          <span className="availability-label">AVAILABLE FOR WORK</span>
+          <span className="availability-label">{language === 'en' ? 'AVAILABLE FOR WORK' : 'DISPONIBLE PARA TRABAJAR'}</span>
         </a>
+        <div className="language-toggle" aria-label="Language selector"><button className={language === 'en' ? 'active' : ''} onClick={() => setLanguage('en')} aria-pressed={language === 'en'}>EN</button><span>/</span><button className={language === 'es' ? 'active' : ''} onClick={() => setLanguage('es')} aria-pressed={language === 'es'}>ES</button></div>
         <button className="menu-button" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} onClick={() => setOpen(!open)}>{open ? <X size={20}/> : <Menu size={20}/>}</button>
       </div>
     </header>
@@ -346,5 +352,18 @@ function Footer() {
 }
 
 export default function App() {
-  return useLocation().pathname === '/resume' ? <Resume/> : <Home/>;
+  const [language, setLanguage] = useState<Language>(() => {
+    if (typeof window === 'undefined') return 'en';
+    return window.localStorage.getItem('ulises-language') === 'es' ? 'es' : 'en';
+  });
+  const location = useLocation();
+
+  useEffect(() => {
+    document.documentElement.lang = language;
+    window.localStorage.setItem('ulises-language', language);
+  }, [language]);
+
+  return <LanguageContext.Provider value={{ language, setLanguage }}>
+    {location.pathname === '/resume' ? <Resume/> : <Home/>}
+  </LanguageContext.Provider>;
 }
