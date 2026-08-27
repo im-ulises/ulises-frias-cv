@@ -102,7 +102,7 @@ function Header() {
           <span className="availability-light" aria-hidden="true" />
           <span className="availability-label">{language === 'en' ? 'AVAILABLE FOR WORK' : 'DISPONIBLE PARA TRABAJAR'}</span>
         </a>
-        <div className="language-toggle" aria-label="Language selector"><button className={language === 'en' ? 'active' : ''} onClick={() => setLanguage('en')} aria-pressed={language === 'en'}>EN</button><span>/</span><button className={language === 'es' ? 'active' : ''} onClick={() => setLanguage('es')} aria-pressed={language === 'es'}>ES</button></div>
+        <div className="language-toggle" aria-label={language === 'en' ? 'Language selector' : 'Selector de idioma'}><button className={language === 'en' ? 'active' : ''} onClick={() => setLanguage('en')} aria-pressed={language === 'en'}>EN</button><span>/</span><button className={language === 'es' ? 'active' : ''} onClick={() => setLanguage('es')} aria-pressed={language === 'es'}>ES</button></div>
         <button className="menu-button" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} onClick={() => setOpen(!open)}>{open ? <X size={20}/> : <Menu size={20}/>}</button>
       </div>
     </header>
@@ -140,7 +140,7 @@ function Home() {
         <div className="hero-grid">
           <h1 id="hero-title">{es ? <>Construyo sistemas de IA que convierten <em>problemas de negocio</em> en workflows implementados.</> : <>I build AI systems that turn <em>business problems</em> into deployed workflows.</>}</h1>
           <div className="hero-aside">
-            <figure className="hero-portrait"><img src="/ulises-portrait.jpg" alt="Ulises Frías" loading="eager" width="1600" height="900" /><figcaption>ULISES FRÍAS / AI BUILDER</figcaption></figure>
+            <figure className="hero-portrait"><img src="/ulises-portrait.jpg" alt="Ulises Frías" loading="eager" width="1600" height="900" /><figcaption>{es ? 'ULISES FRÍAS / CONSTRUCTOR DE IA' : 'ULISES FRÍAS / AI BUILDER'}</figcaption></figure>
             <p className="hero-kicker">{es ? <>Constructor · Operador<br/>Frente al cliente</> : <>Builder · Operator<br/>Customer-facing</>}</p>
             <p className="hero-copy">{es ? 'Soy un constructor de IA basado en México que trabaja entre agentes autónomos, producto y deployment con clientes.' : 'I’m a Mexico-based AI builder working across autonomous agents, product and customer deployment.'}</p>
             <p className="hero-copy">{es ? 'Construyo sistemas técnicos y trabajo directamente con empresas para convertir problemas ambiguos en workflows de IA listos para producción.' : 'I build technical systems and work directly with businesses to turn ambiguous problems into production-ready AI workflows.'}</p>
