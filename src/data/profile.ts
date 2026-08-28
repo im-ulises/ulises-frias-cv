@@ -37,10 +37,10 @@ export const signals = [
   },
   {
     number: '03',
-    name: 'Crobi',
-    label: 'INDEPENDENT R&D · AGENTIC SYSTEMS',
+    name: 'Independent Agentic Systems R&D',
+    label: 'AI SYSTEMS BUILDER · INDEPENDENT R&D',
     title: 'Building a controlled agent execution system.',
-    body: 'Independent R&D project built with Python, FastAPI and REST APIs. Crobi coordinates agent workflows and worker execution, connects tools through APIs and MCP, maintains memory, and adds human approvals, permissions and traceable execution for controlled autonomous work.',
+    body: 'Independent R&D project built with Python, FastAPI and REST APIs. The system coordinates agent workflows and worker execution, connects tools through APIs and MCP, maintains memory, and adds human approvals, permissions and traceable execution for controlled autonomous work.',
     proof: [
       'Python, FastAPI and REST APIs',
       'Agent orchestration and worker execution',
@@ -102,10 +102,10 @@ export const signalsEs = [
   },
   {
     number: '03',
-    name: 'Crobi',
-    label: 'I+D INDEPENDIENTE · SISTEMAS AGÉNTICOS',
+    name: 'I+D independiente · Sistemas agénticos',
+    label: 'CONSTRUCTOR DE SISTEMAS DE IA · I+D INDEPENDIENTE',
     title: 'Construyendo un sistema de ejecución controlada para agentes.',
-    body: 'Proyecto independiente de I+D construido con Python, FastAPI y APIs REST. Crobi coordina workflows de agentes y ejecución de workers, conecta herramientas mediante APIs y MCP, mantiene memoria y agrega aprobaciones humanas, permisos y ejecución trazable para trabajo autónomo controlado.',
+    body: 'Proyecto independiente de I+D construido con Python, FastAPI y APIs REST. El sistema coordina workflows de agentes y ejecución de workers, conecta herramientas mediante APIs y MCP, mantiene memoria y agrega aprobaciones humanas, permisos y ejecución trazable para trabajo autónomo controlado.',
     proof: [
       'Python, FastAPI y APIs REST',
       'Orquestación de agentes y ejecución de workers',
@@ -166,7 +166,7 @@ export const experience = [
   {
     year: '2026 — Present',
     role: 'AI Systems Builder · Independent R&D',
-    company: 'Crobi',
+    company: 'Independent Agentic Systems R&D',
     description: 'Building a controlled agent execution system with Python, FastAPI and REST APIs.',
     bullets: [
       'Agent orchestration and worker execution',
@@ -217,7 +217,7 @@ export const experienceEs = [
   {
     year: '2026 — Presente',
     role: 'Constructor de sistemas de IA · I+D independiente',
-    company: 'Crobi',
+    company: 'I+D independiente · Sistemas agénticos',
     description: 'Construyo un sistema de ejecución controlada para agentes con Python, FastAPI y APIs REST.',
     bullets: [
       'Orquestación de agentes y ejecución de workers',

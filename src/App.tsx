@@ -215,13 +215,13 @@ function Home() {
         </div>
       </section>
 
-      <section className="split-section section-pad section-rule" aria-labelledby="crobi-title">
+      <section className="split-section section-pad section-rule" aria-labelledby="agentic-rd-title">
         <div className="section-heading"><Eyebrow>{es ? 'CONSTRUCCIÓN / 03' : 'BUILD / 03'}</Eyebrow><span className="section-number">05 / 11</span></div>
         <div className="split-grid">
-          <div className="split-title"><h2 id="crobi-title">{es ? 'También puedo construir el sistema.' : 'I can build the system, too.'}</h2></div>
+          <div className="split-title"><h2 id="agentic-rd-title">{es ? 'También puedo construir el sistema.' : 'I can build the system, too.'}</h2></div>
           <div className="split-copy">
-            <p className="lead">Crobi — {es ? 'I+D independiente en sistemas agénticos.' : 'independent R&D in agentic systems.'}</p>
-            <p>{es ? 'Crobi es un sistema que estoy construyendo con Python, FastAPI y APIs REST para coordinar workflows de agentes y ejecución de workers. Conecta herramientas mediante APIs y MCP, mantiene memoria y agrega puntos explícitos de control humano.' : 'Crobi is a system I am building with Python, FastAPI and REST APIs to coordinate agent workflows and worker execution. It connects tools through APIs and MCP, maintains memory and adds explicit human control points.'}</p>
+            <p className="lead">{es ? 'I+D independiente en sistemas agénticos.' : 'Independent R&D in agentic systems.'}</p>
+            <p>{es ? 'Estoy construyendo un sistema con Python, FastAPI y APIs REST para coordinar workflows de agentes y ejecución de workers. Conecta herramientas mediante APIs y MCP, mantiene memoria y agrega puntos explícitos de control humano.' : 'I am building a system with Python, FastAPI and REST APIs to coordinate agent workflows and worker execution. It connects tools through APIs and MCP, maintains memory and adds explicit human control points.'}</p>
             <div className="mini-list">
               <span>01 / {es ? 'Orquestación de agentes · ejecución de workers' : 'Agent orchestration · worker execution'}</span>
               <span>02 / {es ? 'Tool calling · APIs · MCP · memoria' : 'Tool calling · APIs · MCP · memory'}</span>
