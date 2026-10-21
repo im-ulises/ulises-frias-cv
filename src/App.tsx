@@ -13,8 +13,8 @@ function Header() {
   const location = useLocation();
   const onHome = location.pathname === '/';
   const links = onHome
-    ? [['#work', language === 'en' ? 'Work' : 'Trabajo'], ['#experience', language === 'en' ? 'Experience' : 'Experiencia'], ['#about', language === 'en' ? 'About' : 'Sobre mí']]
-    : [['/', language === 'en' ? 'Home' : 'Inicio'], ['/#work', language === 'en' ? 'Work' : 'Trabajo'], ['/#experience', language === 'en' ? 'Experience' : 'Experiencia']];
+    ? [['#work', language === 'en' ? 'Work' : 'Trabajo'], ['#crobi', 'Crobi OS'], ['#experience', language === 'en' ? 'Experience' : 'Experiencia']]
+    : [['/', language === 'en' ? 'Home' : 'Inicio'], ['/#work', language === 'en' ? 'Work' : 'Trabajo'], ['/#crobi', 'Crobi OS']];
 
   return <>
     <style>{`
@@ -67,7 +67,7 @@ function Header() {
         .resume-page { max-width:none !important; min-height:0 !important; padding:0 !important; margin:0 !important; background:#fff !important; }
         .resume-header h1 { font-size:42px !important; margin:10px 0 5px !important; }
         .resume-position { font-size:10px !important; margin:0 !important; }
-        .resume-contact { font-size:7.8px !important; line-height:1.42 !important; }
+        .resume-contact { font-size:8.8px !important; line-height:1.42 !important; }
         .resume-rule { margin:14px 0 10px !important; }
         .resume-summary { grid-template-columns:21% 1fr !important; gap:12px !important; }
         .resume-summary p { font-size:10.5px !important; line-height:1.2 !important; max-width:none !important; }
@@ -75,19 +75,19 @@ function Header() {
         .resume-page h2 { font-size:7.5px !important; margin-bottom:7px !important; }
         .resume-item { padding:7px 0 8px !important; break-inside:avoid; }
         .resume-item h3 { font-size:12px !important; margin-bottom:2px !important; }
-        .resume-item p,.resume-selected .resume-work-body { font-size:7.8px !important; line-height:1.28 !important; }
+        .resume-item p,.resume-selected .resume-work-body { font-size:8.8px !important; line-height:1.28 !important; }
         .resume-signal-label,.resume-date { font-size:6.7px !important; margin-bottom:4px !important; }
         .resume-bullets { gap:2px !important; margin-top:4px !important; }
-        .resume-bullets li { font-size:7px !important; line-height:1.22 !important; padding-left:9px !important; }
+        .resume-bullets li { font-size:8.3px !important; line-height:1.22 !important; padding-left:9px !important; }
         .resume-earlier { margin-top:12px !important; padding-top:7px !important; }
         .resume-earlier-grid { gap:14px !important; }
         .resume-earlier-item { padding-top:6px !important; break-inside:avoid; }
         .resume-earlier-item h3 { font-size:9.5px !important; }
-        .resume-earlier-item .resume-role,.resume-earlier-item p { font-size:7px !important; line-height:1.22 !important; }
+        .resume-earlier-item .resume-role,.resume-earlier-item p { font-size:8.3px !important; line-height:1.22 !important; }
         .resume-skills { margin-top:12px !important; padding-top:7px !important; }
         .resume-skills-grid { grid-template-columns:repeat(4,1fr) !important; gap:10px !important; }
-        .resume-skill-group h3 { font-size:6.8px !important; margin-bottom:3px !important; }
-        .resume-skill-group p { font-size:6.8px !important; line-height:1.28 !important; }
+        .resume-skill-group h3 { font-size:8px !important; margin-bottom:3px !important; }
+        .resume-skill-group p { font-size:8px !important; line-height:1.28 !important; }
       }
       @media (prefers-reduced-motion: reduce) { .availability-pill { animation:none; } .availability-light::after { animation:none; opacity:.35; } }
     `}</style>
@@ -100,7 +100,7 @@ function Header() {
             : <Link key={href} to={href} onClick={() => setOpen(false)}>{label}</Link>)}
           <a href={profile.github} target="_blank" rel="noreferrer">GitHub <ArrowUpRight size={12}/></a>
           <a href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn <ArrowUpRight size={12}/></a>
-          <Link className="nav-cv" to="/resume" onClick={() => setOpen(false)}>{language === 'en' ? 'Download CV' : 'Descargar CV'} <Download size={13}/></Link>
+          <Link className="nav-cv" to="/resume" onClick={() => setOpen(false)}>{language === 'en' ? 'View CV' : 'Ver CV'} <Download size={13}/></Link>
           <a href={`mailto:${profile.email}`} onClick={() => setOpen(false)}>{language === 'en' ? 'Contact' : 'Contacto'} <ArrowUpRight size={12}/></a>
         </nav>
         <a className="availability-pill" href={onHome ? '#contact' : '/#contact'} aria-label={language === 'en' ? 'Available for work — go to contact section' : 'Disponible para trabajar — ir a contacto'}>
@@ -139,7 +139,7 @@ function Home() {
     <Header />
     <main>
       <section className="hero section-pad" aria-labelledby="hero-title">
-        <div className="hero-meta"><Eyebrow>{es ? 'IMPLEMENTACIÓN DE IA · SISTEMAS AGÉNTICOS · PRODUCTO' : 'AI DEPLOYMENT · AGENTIC SYSTEMS · PRODUCT'}</Eyebrow><span className="hero-index">01 / 11</span></div>
+        <div className="hero-meta"><Eyebrow>{es ? 'IMPLEMENTACIÓN DE IA · SISTEMAS AGÉNTICOS · PRODUCTO' : 'AI DEPLOYMENT · AGENTIC SYSTEMS · PRODUCT'}</Eyebrow><span className="hero-index">01 / 12</span></div>
         <div className="hero-grid">
           <h1 id="hero-title">{es ? <>Convierto <em>problemas ambiguos de negocio</em> en sistemas de IA implementables.</> : <>I turn <em>ambiguous business problems</em> into implementable AI systems.</>}</h1>
           <div className="hero-aside">
@@ -158,25 +158,31 @@ function Home() {
         </div>
       </section>
 
+      <section className="proof-strip section-pad" aria-label={es ? 'Resumen de experiencia verificable' : 'Experience highlights'}>
+        <div className="proof-tile"><strong>33</strong><span>{es ? 'formatos operativos analizados y clasificados para BOSUR' : 'operational forms analyzed and classified for BOSUR'}</span></div>
+        <div className="proof-tile"><strong>40</strong><span>{es ? 'dueños de negocio capacitados en una sesión de IA' : 'business owners taught practical AI workflows in a live session'}</span></div>
+        <div className="proof-tile"><strong>2017</strong><span>{es ? 'año en que cofundé EVO Studios' : 'year I co-founded EVO Studios'}</span></div>
+      </section>
+
       <section id="work" className="signals section-pad section-rule" aria-labelledby="signals-title">
-        <div className="section-heading"><Eyebrow>{es ? 'TRABAJO SELECCIONADO' : 'SELECTED WORK'}</Eyebrow><span className="section-number">02 / 11</span></div>
+        <div className="section-heading"><Eyebrow>{es ? 'TRABAJO SELECCIONADO' : 'SELECTED WORK'}</Eyebrow><span className="section-number">02 / 12</span></div>
         <div className="signals-intro">
           <h2 id="signals-title">{es ? <>Diagnosticar.<br/><span>Entregar.</span><br/>Construir.</> : <>Diagnose.<br/><span>Deliver.</span><br/>Build.</>}</h2>
           <p>{es ? 'La secuencia es intencional: entender la operación, convertir requerimientos reales en entrega, construir sistemas, hacerse cargo del cliente y habilitar a los usuarios.' : 'The sequence is intentional: understand the operation, turn real requirements into delivery, build systems, own the customer, and enable users.'}</p>
         </div>
         <div className="signal-list">
-          {displayedSignals.map(signal => <Reveal className="signal" key={signal.name}>
+          {displayedSignals.map((signal, index) => <Reveal className="signal" key={signal.name}>
             <span className="signal-number">{signal.number}</span>
             <div className="signal-name">{signal.name}<small>{signal.label}</small></div>
             <h3>{signal.title}</h3>
             <p>{signal.body}</p>
-            <ArrowUpRight className="signal-arrow" size={20}/>
+            <a className="signal-arrow-link" href={['#bosur-title', '#real-world-title', '#crobi', '#founder-title', '#speaking-title'][index]} aria-label={`${es ? 'Explorar proyecto' : 'Explore project'}: ${signal.name}`}><ArrowUpRight className="signal-arrow" size={20}/></a>
           </Reveal>)}
         </div>
       </section>
 
       <section className="case-study section-pad section-rule" aria-labelledby="bosur-title">
-        <div className="section-heading"><Eyebrow>{es ? 'CASO DESTACADO / 01' : 'FEATURED CASE STUDY / 01'}</Eyebrow><span className="section-number">03 / 11</span></div>
+        <div className="section-heading"><Eyebrow>{es ? 'CASO DESTACADO / 01' : 'FEATURED CASE STUDY / 01'}</Eyebrow><span className="section-number">03 / 12</span></div>
         <div className="case-header">
           <h2 id="bosur-title">BOSUR<span className="dot">.</span></h2>
           <p>{es ? 'Diagnosticar el negocio antes de decidir qué construir.' : 'Diagnose the business before deciding what to build.'}</p>
@@ -203,8 +209,32 @@ function Home() {
         </div>
       </section>
 
+      <section id="crobi" className="crobi-case section-pad section-rule" aria-labelledby="crobi-title">
+        <div className="section-heading"><Eyebrow>{es ? 'CASO TÉCNICO / I+D INDEPENDIENTE' : 'TECHNICAL CASE STUDY / INDEPENDENT R&D'}</Eyebrow><span className="section-number">04 / 12</span></div>
+        <div className="crobi-case-grid">
+          <div className="crobi-case-intro">
+            <span className="crobi-category">{es ? 'SISTEMAS AGÉNTICOS · SEGURIDAD OPERATIVA' : 'AGENTIC SYSTEMS · OPERATIONAL CONTROL'}</span>
+            <h2 id="crobi-title">Crobi <em>OS.</em></h2>
+            <p className="crobi-lede">{es ? 'Construyo la infraestructura para que los agentes puedan ejecutar trabajo sin perder el control humano.' : 'Building the infrastructure for agents to do real work without losing human oversight.'}</p>
+            <p className="crobi-description">{es ? 'Proyecto privado de I+D: coordinación de workflows, llamadas a herramientas, memoria, permisos, aprobaciones humanas y trazabilidad. Aquí presento el problema de ingeniería y la arquitectura, no afirmo un despliegue comercial.' : 'Private R&D project: workflow coordination, tool calling, memory, permissions, human approvals and execution tracing. This documents the engineering approach, not a claim of commercial deployment.'}</p>
+            <a className="crobi-contact" href={`mailto:${profile.email}?subject=Crobi%20OS%20technical%20walkthrough`}>{es ? 'Solicitar explicación técnica' : 'Request a technical walkthrough'} <ArrowUpRight size={16}/></a>
+          </div>
+          <div className="crobi-system" aria-label={es ? 'Diagrama conceptual de arquitectura Crobi' : 'Conceptual Crobi architecture diagram'}>
+            <div className="crobi-system-label">{es ? 'MODELO DE EJECUCIÓN · CONCEPTUAL' : 'EXECUTION MODEL · CONCEPTUAL'}</div>
+            <div className="crobi-system-stage"><small>01</small><div><strong>{es ? 'Intención y contexto' : 'Intent & context'}</strong><span>{es ? 'Usuario · memoria · objetivos' : 'User · memory · goals'}</span></div></div>
+            <div className="crobi-system-connector">↓</div>
+            <div className="crobi-system-stage"><small>02</small><div><strong>{es ? 'Orquestación de agentes' : 'Agent orchestration'}</strong><span>Python · FastAPI · MCP · APIs</span></div></div>
+            <div className="crobi-system-connector">↓</div>
+            <div className="crobi-system-stage crobi-gate"><small>03</small><div><strong>{es ? 'Permisos y aprobación humana' : 'Permissions & human approval'}</strong><span>{es ? 'Control antes de ejecutar' : 'Control before execution'}</span></div></div>
+            <div className="crobi-system-connector">↓</div>
+            <div className="crobi-system-stage"><small>04</small><div><strong>{es ? 'Herramientas y registro' : 'Tools & traceability'}</strong><span>{es ? 'Ejecución · rastro auditable' : 'Execution · auditable trail'}</span></div></div>
+          </div>
+        </div>
+        <div className="crobi-bottom"><span>{es ? 'ESTADO: PROTOTIPO DE I+D · REPOSITORIO PRIVADO' : 'STATUS: R&D PROTOTYPE · PRIVATE REPOSITORY'}</span><span>{es ? 'Sin afirmaciones de adopción comercial' : 'No commercial adoption claimed'}</span></div>
+      </section>
+
       <section className="split-section section-pad section-rule" aria-labelledby="real-world-title">
-        <div className="section-heading"><Eyebrow>{es ? 'ENTREGA / 02' : 'DELIVERY / 02'}</Eyebrow><span className="section-number">04 / 11</span></div>
+        <div className="section-heading"><Eyebrow>{es ? 'ENTREGA / 02' : 'DELIVERY / 02'}</Eyebrow><span className="section-number">05 / 12</span></div>
         <div className="split-grid">
           <div className="split-title"><h2 id="real-world-title">{es ? 'IA dentro de trabajo comercial real.' : 'AI inside real commercial work.'}</h2></div>
           <div className="split-copy">
@@ -216,7 +246,7 @@ function Home() {
       </section>
 
       <section className="split-section section-pad section-rule" aria-labelledby="agentic-rd-title">
-        <div className="section-heading"><Eyebrow>{es ? 'CONSTRUCCIÓN / 03' : 'BUILD / 03'}</Eyebrow><span className="section-number">05 / 11</span></div>
+        <div className="section-heading"><Eyebrow>{es ? 'CONSTRUCCIÓN / 03' : 'BUILD / 03'}</Eyebrow><span className="section-number">06 / 12</span></div>
         <div className="split-grid">
           <div className="split-title"><h2 id="agentic-rd-title">{es ? 'También puedo construir el sistema.' : 'I can build the system, too.'}</h2></div>
           <div className="split-copy">
@@ -233,7 +263,7 @@ function Home() {
       </section>
 
       <section className="split-section founder section-pad section-rule" aria-labelledby="founder-title">
-        <div className="section-heading"><Eyebrow>{es ? 'RESPONSABILIDAD / 04' : 'OWNERSHIP / 04'}</Eyebrow><span className="section-number">06 / 11</span></div>
+        <div className="section-heading"><Eyebrow>{es ? 'RESPONSABILIDAD / 04' : 'OWNERSHIP / 04'}</Eyebrow><span className="section-number">07 / 12</span></div>
         <div className="split-grid">
           <div className="split-title"><h2 id="founder-title">{es ? 'Hacerse cargo del cliente.' : 'Own the customer.'}</h2></div>
           <div className="split-copy">
@@ -250,7 +280,7 @@ function Home() {
       </section>
 
       <section className="speaking section-pad section-rule" aria-labelledby="speaking-title">
-        <div className="section-heading"><Eyebrow>{es ? 'ENABLEMENT / 05' : 'ENABLEMENT / 05'}</Eyebrow><span className="section-number">07 / 11</span></div>
+        <div className="section-heading"><Eyebrow>{es ? 'ENABLEMENT / 05' : 'ENABLEMENT / 05'}</Eyebrow><span className="section-number">08 / 12</span></div>
         <div className="speaking-grid">
           <h2 id="speaking-title">{es ? <>Hacer la IA <em>utilizable</em> también es deployment.</> : <>Making AI <em>usable</em> is part of deployment.</>}</h2>
           <div>
@@ -262,7 +292,7 @@ function Home() {
       </section>
 
       <section id="experience" className="experience section-pad section-rule" aria-labelledby="experience-title">
-        <div className="section-heading"><Eyebrow>{es ? 'EXPERIENCIA' : 'EXPERIENCE'}</Eyebrow><span className="section-number">08 / 11</span></div>
+        <div className="section-heading"><Eyebrow>{es ? 'EXPERIENCIA' : 'EXPERIENCE'}</Eyebrow><span className="section-number">09 / 12</span></div>
         <div className="experience-heading">
           <h2 id="experience-title">{es ? <>Un camino construido<br/>alrededor de la <em>responsabilidad.</em></> : <>A path built<br/>around <em>ownership.</em></>}</h2>
           <p>{es ? 'Desde producción y clientes hasta producto y sistemas de IA: el patrón ha sido entender el problema, definir una solución viable y llevarla a una entrega concreta.' : 'From production and customers to product and AI systems, the recurring pattern has been understanding the problem, defining a viable solution and carrying it through to concrete delivery.'}</p>
@@ -281,7 +311,7 @@ function Home() {
       </section>
 
       <section className="capabilities section-pad section-rule" aria-labelledby="capabilities-title">
-        <div className="section-heading"><Eyebrow>{es ? 'CAPACIDADES' : 'CAPABILITIES'}</Eyebrow><span className="section-number">09 / 11</span></div>
+        <div className="section-heading"><Eyebrow>{es ? 'CAPACIDADES' : 'CAPABILITIES'}</Eyebrow><span className="section-number">10 / 12</span></div>
         <div className="capabilities-head">
           <h2 id="capabilities-title">{es ? <>Técnico.<br/><em>Customer-facing.</em></> : <>Technical.<br/><em>Customer-facing.</em></>}</h2>
           <p>{es ? 'Fluidez técnica suficiente para prototipar e integrar; experiencia de cliente suficiente para descubrir, estructurar y comunicar qué vale la pena construir.' : 'Enough technical fluency to prototype and integrate; enough customer experience to discover, structure and communicate what is worth building.'}</p>
@@ -295,7 +325,7 @@ function Home() {
       </section>
 
       <section id="about" className="about section-pad section-rule" aria-labelledby="about-title">
-        <div className="section-heading"><Eyebrow>{es ? 'POSICIONAMIENTO' : 'POSITIONING'}</Eyebrow><span className="section-number">10 / 11</span></div>
+        <div className="section-heading"><Eyebrow>{es ? 'POSICIONAMIENTO' : 'POSITIONING'}</Eyebrow><span className="section-number">11 / 12</span></div>
         <div className="about-grid">
           <h2 id="about-title">{es ? 'Trabajo entre quienes viven el problema y quienes construyen el sistema.' : 'I work between the people living the problem and the people building the system.'}</h2>
           <div>
@@ -306,7 +336,7 @@ function Home() {
       </section>
 
       <section id="contact" className="contact section-pad" aria-labelledby="contact-title">
-        <div className="contact-top"><Eyebrow>{es ? 'HABLEMOS' : "LET'S TALK"}</Eyebrow><span className="section-number">11 / 11</span></div>
+        <div className="contact-top"><Eyebrow>{es ? 'HABLEMOS' : "LET'S TALK"}</Eyebrow><span className="section-number">12 / 12</span></div>
         <h2 id="contact-title">{es ? <>Del problema ambiguo al <em>plan técnico ejecutable.</em></> : <>From ambiguous problem to <em>executable technical plan.</em></>}</h2>
         <p>{es ? 'Abierto a conversaciones sobre AI Deployment, Deployment Strategy, Enterprise Solutions, Forward Deployed Engineering y sistemas agénticos.' : 'Open to conversations around AI Deployment, Deployment Strategy, Enterprise Solutions, Forward Deployed Engineering and agentic systems.'}</p>
         <div className="contact-actions">
@@ -335,7 +365,7 @@ function Resume() {
     <main className="resume-page">
       <div className="resume-actions">
         <Link to="/">← {es ? 'Volver al sitio' : 'Back to site'}</Link>
-        <button onClick={() => window.print()} title={es ? 'Abrir el diálogo de impresión para guardar como PDF' : 'Open the print dialog to save as PDF'}><Download size={14}/> {es ? 'Imprimir / Guardar PDF' : 'Print / Save PDF'}</button>
+        <div className="resume-downloads"><a href="/ulises-frias-cv-ats.txt" download>{es ? 'Descargar texto ATS' : 'Download ATS text'}</a><button onClick={() => window.print()} title={es ? 'Abrir el diálogo de impresión para guardar como PDF' : 'Open the print dialog to save as PDF'}><Download size={14}/> {es ? 'Imprimir / Guardar PDF' : 'Print / Save PDF'}</button></div>
       </div>
       <section className="resume-header">
         <div>
@@ -425,6 +455,14 @@ export default function App() {
     document.documentElement.lang = language;
     window.localStorage.setItem('ulises-language', language);
   }, [language]);
+
+  useEffect(() => {
+    if (location.pathname !== '/' || !location.hash) return;
+    const frame = window.requestAnimationFrame(() => {
+      document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView({ behavior: 'smooth' });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [location.pathname, location.hash]);
 
   useEffect(() => {
     const onResume = location.pathname === '/resume';
