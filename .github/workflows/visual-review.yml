@@ -1,0 +1,32 @@
+name: Visual review
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  screenshots:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build
+      - name: Install browser
+        run: npx --yes playwright@1.56.1 install chromium --with-deps
+      - name: Capture desktop and mobile screenshots
+        run: |
+          mkdir -p screenshots
+          npm run preview -- --host 127.0.0.1 > /tmp/vite-preview.log 2>&1 &
+          sleep 5
+          npx --yes playwright@1.56.1 screenshot --browser chromium --viewport-size "1440,900" --wait-for-timeout 1600 --full-page http://127.0.0.1:4173/ screenshots/desktop-full.png
+          npx --yes playwright@1.56.1 screenshot --browser chromium --viewport-size "390,844" --wait-for-timeout 1600 --full-page http://127.0.0.1:4173/ screenshots/mobile-full.png
+          npx --yes playwright@1.56.1 screenshot --browser chromium --viewport-size "1440,900" --wait-for-timeout 1600 http://127.0.0.1:4173/ screenshots/desktop-first-fold.png
+          npx --yes playwright@1.56.1 screenshot --browser chromium --viewport-size "390,844" --wait-for-timeout 1600 http://127.0.0.1:4173/ screenshots/mobile-first-fold.png
+      - uses: actions/upload-artifact@v4
+        with:
+          name: portfolio-visual-review
+          path: screenshots/
+          if-no-files-found: error
