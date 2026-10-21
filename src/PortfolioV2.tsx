@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ArrowDown, ArrowRight, ArrowUpRight, Check, Download, Code2, BriefcaseBusiness, Mail, Menu, ShieldCheck, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { experience, experienceEs, profile } from './data/profile';
@@ -94,20 +94,74 @@ export default function PortfolioV2({ language, setLanguage }: Props) {
   const t = translations[language];
   const es = language === 'es';
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
+  const sections = [
+    { id: 'work', label: t.navWork },
+    { id: 'approach', label: t.navApproach },
+    { id: 'experience', label: t.navExperience },
+    { id: 'contact', label: t.navContact },
+  ];
+
+  // Highlight the section that has reached the reading position below the sticky header.
+  // At the top/hero, keep every navigation pill neutral.
+  useEffect(() => {
+    let frame = 0;
+    const updateActiveSection = () => {
+      frame = 0;
+      const readingLine = 190;
+      let current: string | null = null;
+      for (const id of ['work', 'approach', 'experience', 'contact']) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= readingLine) current = id;
+      }
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 36) {
+        current = 'contact';
+      }
+      setActiveSection(previous => previous === current ? previous : current);
+    };
+    const onScroll = () => {
+      if (!frame) frame = window.requestAnimationFrame(updateActiveSection);
+    };
+    updateActiveSection();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setMenuOpen(false);
+    };
+    window.addEventListener('keydown', onEscape);
+    return () => window.removeEventListener('keydown', onEscape);
+  }, [menuOpen]);
+
   const history = (es ? experienceEs : experience).slice(0, 3);
   return <div className="portfolio-v2" id="top">
     <header className="p2-header">
       <a href="#top" className="p2-monogram" aria-label="Ulises Frías — Home">UF<span className="p2-monogram-point">.</span></a>
-      <nav className={'p2-navigation' + (menuOpen ? ' is-open' : '')} aria-label={es ? 'Navegación principal' : 'Main navigation'}>
-        <a href="#work" onClick={() => setMenuOpen(false)}>{t.navWork}</a>
-        <a href="#approach" onClick={() => setMenuOpen(false)}>{t.navApproach}</a>
-        <a href="#experience" onClick={() => setMenuOpen(false)}>{t.navExperience}</a>
-        <a href="#contact" onClick={() => setMenuOpen(false)}>{t.navContact}</a>
+      <nav id="portfolio-pill-navigation" className={'p2-navigation' + (menuOpen ? ' is-open' : '')} aria-label={es ? 'Navegación principal' : 'Main navigation'}>
+        {sections.map(section => (
+          <a
+            href={'#' + section.id}
+            key={section.id}
+            className={'p2-nav-pill' + (activeSection === section.id ? ' is-active' : '')}
+            aria-current={activeSection === section.id ? 'location' : undefined}
+            onClick={() => { setActiveSection(section.id); setMenuOpen(false); }}
+          >
+            {section.label}
+          </a>
+        ))}
       </nav>
       <div className="p2-header-actions">
         <div className="p2-language"><button type="button" className={es ? '' : 'active'} onClick={() => setLanguage('en')} aria-pressed={!es}>EN</button><span>/</span><button type="button" className={es ? 'active' : ''} onClick={() => setLanguage('es')} aria-pressed={es}>ES</button></div>
         <Link to="/resume" className="p2-resume-button">{t.cv} <ArrowUpRight size={16}/></Link>
-        <button type="button" className="p2-menu" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? 'Close menu' : 'Open menu'} aria-expanded={menuOpen}>{menuOpen ? <X size={23}/> : <Menu size={23}/>}</button>
+        <button type="button" className="p2-menu" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? (es ? 'Cerrar menú' : 'Close menu') : (es ? 'Abrir menú' : 'Open menu')} aria-expanded={menuOpen} aria-controls="portfolio-pill-navigation">{menuOpen ? <X size={23}/> : <Menu size={23}/>}</button>
       </div>
     </header>
 
