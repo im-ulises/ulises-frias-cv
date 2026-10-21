@@ -111,7 +111,7 @@ export default function AgentWorkflowDemo({ language }: { language: Language }) 
   const approve = () => { setDecision('approved'); setPhase(4); };
   const reject = () => { setDecision('denied'); setPhase(5); };
 
-  return <section className="demo-section section-pad" aria-labelledby="demo-title">
+  return <section id="demo" className="demo-section section-pad" aria-labelledby="demo-title">
     <div className="demo-header">
       <span className="demo-overline">{t.kicker}</span>
       <h2 id="demo-title">{t.title}</h2>
