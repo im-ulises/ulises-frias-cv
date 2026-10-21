@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
+import PortfolioV2 from './PortfolioV2';
 import { ArrowDownRight, ArrowUpRight, Check, Download, Mail, Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { experience, experienceEs, profile, signals, signalsEs, skills, skillsEs } from './data/profile';
@@ -477,6 +478,6 @@ export default function App() {
   }, [language, location.pathname]);
 
   return <LanguageContext.Provider value={{ language, setLanguage }}>
-    {location.pathname === '/resume' ? <Resume/> : <Home/>}
+    {location.pathname === '/resume' ? <Resume/> : <PortfolioV2 language={language} setLanguage={setLanguage}/>}
   </LanguageContext.Provider>;
 }
