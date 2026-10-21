@@ -1,0 +1,62 @@
+ULISES FRÍAS
+AI Deployment | Forward Deployed Engineering | Agentic Systems | Solutions Engineering
+Mexico | English / Spanish
+Email: hello@ulisesfrias.com
+Portfolio: https://ulises-frias-cv.pages.dev
+GitHub: https://github.com/im-ulises
+LinkedIn: https://www.linkedin.com/in/ulises-fr%C3%ADas-8a7790172/
+
+PROFESSIONAL SUMMARY
+Customer-facing AI builder and founder translating ambiguous business needs into implementable AI workflows. Experience in discovery, workflow mapping, solution architecture, prototyping and end-to-end delivery. Technical experience with Python, FastAPI, REST APIs, MCP, agent workflows, memory, approvals, permissions and traceable execution. Commercial and creative background working directly with clients and production teams.
+
+SELECTED PROJECTS
+BOSUR — Paid Deployment Discovery (Phase 0)
+- Reviewed and functionally classified 33 operational/compliance forms.
+- Structured a proposed scope of approximately 8 modules and 18–20 workflows.
+- Designed a tablet-first solution approach covering structured data, audit evidence, alerts, IoT temperature monitoring and an agentic layer.
+- Scope and architecture completed; software implementation is not claimed as completed.
+
+Crobi OS — Independent Agentic Systems R&D (2026–Present)
+- Prototyping agent workflow coordination and worker execution using Python, FastAPI and REST APIs.
+- Integrating tools via APIs and MCP, with memory and explicit human control points.
+- Designing permissions, approvals and execution traceability for controlled agent work.
+- Private R&D repository; no commercial deployment claim.
+
+Big Media — Customer-Facing AI Delivery
+- Translate campaign briefs into technically feasible AI-enabled workflows.
+- Work with commercial, creative and production stakeholders.
+- Deliver against real project timelines and operational constraints.
+
+EVO AI Campus / Cinematic AI
+- Helped deliver paid practical generative-AI training to 40 business owners in Ciudad Juárez.
+- Explained applied generative-AI workflows to nontechnical business audiences.
+
+PROFESSIONAL EXPERIENCE
+Big Media | AI & Creative Technology | Present
+- Collaborate across commercial, creative and production requirements.
+- Scope technically feasible AI workflows from ambiguous stakeholder requests.
+- Deliver within real commercial production deadlines.
+
+EVO Studios | Co-Founder, Client Delivery & Creative Technology | 2017–Present
+- Co-founded a production and advertising company.
+- Led customer discovery, commercial conversations, scoping and end-to-end client delivery.
+- Expanded services into AI-powered creative workflows, implementation and education.
+
+Crobi OS | AI Systems Builder, Independent R&D | 2026–Present
+- Build and prototype controlled agent execution systems.
+- Work with agent orchestration, tool calling, memory, permissions, approvals and traces.
+
+Eco Innovación | Marketing Director | 2022
+- Led rebranding and marketing direction.
+- Introduced practical generative-AI workflows to the team.
+
+ALV | Founder, Product & Creator Operations | 2020–2021
+- Built the platform concept and coordinated creator operations, branding and partnerships.
+
+SKILLS
+AI systems: LLMs, agent orchestration, tool calling, MCP, memory, human-in-the-loop, agent workflows.
+Engineering: Python, FastAPI, REST APIs, integrations, OpenAPI, Git, TypeScript, Next.js.
+Deployment: Customer discovery, workflow mapping, architecture, prototyping, implementation planning, technical demos.
+Business: Client communications, product strategy, technical sales, AI enablement, workshops.
+
+Portfolio contains additional project context. All project claims distinguish discovery, prototypes and delivered production work.
