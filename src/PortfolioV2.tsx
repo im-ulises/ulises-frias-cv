@@ -125,7 +125,7 @@ export default function PortfolioV2({ language, setLanguage }: Props) {
         </div>
         <div className="p2-hero-image">
           <div className="p2-photo-top"><span>U / F — 2026</span><span>01 / 04</span></div>
-          <img src="/ulises-portrait.jpg" alt="Ulises Frías" width="1600" height="900"/>
+          <img src="https://avatars.githubusercontent.com/u/260186379?v=4" alt="Ulises Frías" width="600" height="600" loading="eager" referrerPolicy="no-referrer"/>
           <div className="p2-photo-graphic" aria-hidden="true"><span className="p2-photo-ring"/><span className="p2-photo-cross">+</span></div>
           <div className="p2-photo-bottom"><span>ULISES FRÍAS</span><span>{t.portrait}</span></div>
         </div>
