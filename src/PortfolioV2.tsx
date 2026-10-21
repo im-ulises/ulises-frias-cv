@@ -125,8 +125,15 @@ export default function PortfolioV2({ language, setLanguage }: Props) {
         </div>
         <div className="p2-hero-image">
           <div className="p2-photo-top"><span>U / F — 2026</span><span>01 / 04</span></div>
-          <img src="https://avatars.githubusercontent.com/u/260186379?v=4" alt="Ulises Frías" width="600" height="600" loading="eager" referrerPolicy="no-referrer"/>
-          <div className="p2-photo-graphic" aria-hidden="true"><span className="p2-photo-ring"/><span className="p2-photo-cross">+</span></div>
+          <div className="p2-hero-sculpture" aria-label={es ? 'Composición gráfica abstracta sobre sistemas de IA' : 'Abstract visual composition about AI systems'}>
+            <div className="p2-sculpture-glow"/>
+            <div className="p2-sculpture-ring p2-sculpture-ring-a"/>
+            <div className="p2-sculpture-ring p2-sculpture-ring-b"/>
+            <div className="p2-sculpture-core"><span>UF<span className="p2-sculpture-dot">.</span></span></div>
+            <div className="p2-sculpture-pill p2-sculpture-pill-a">HUMAN / INTENT</div>
+            <div className="p2-sculpture-pill p2-sculpture-pill-b">SYSTEM / ACTION ↗</div>
+            <div className="p2-sculpture-index">001<br/>/OS</div>
+          </div>
           <div className="p2-photo-bottom"><span>ULISES FRÍAS</span><span>{t.portrait}</span></div>
         </div>
         <div className="p2-hero-bottom"><span>{t.heroSide}</span><a href="#work"><ArrowDown size={17}/> SCROLL TO EXPLORE</a></div>
@@ -149,7 +156,7 @@ export default function PortfolioV2({ language, setLanguage }: Props) {
             <div className="p2-art-noise"/>
             <div className="p2-concept-label">{t.concept}</div>
             <div className="p2-dashboard" role="img" aria-label={es ? 'Ilustración de arquitectura conceptual de Crobi OS' : 'Conceptual Crobi OS architecture illustration'}>
-              <div className="p2-dashboard-top"><span className="p2-dash-brand"><span className="p2-brand-symbol">✳</span> CROBI <span className="p2-dash-os">OS</span></span><span className="p2-dash-top-status"><span/> SYSTEM READY</span><span className="p2-dash-avatar">UF</span></div>
+              <div className="p2-dashboard-top"><span className="p2-dash-brand"><span className="p2-brand-symbol">✳</span> CROBI <span className="p2-dash-os">OS</span></span><span className="p2-dash-top-status"><span/> DESIGN CONCEPT</span><span className="p2-dash-avatar">UF</span></div>
               <div className="p2-dashboard-body">
                 <div className="p2-dashboard-side">
                   <div className="p2-side-row active"><span>▦</span>{t.mockOverview}</div>
@@ -161,8 +168,8 @@ export default function PortfolioV2({ language, setLanguage }: Props) {
                 <div className="p2-dashboard-main">
                   <div className="p2-dash-heading"><span><small>WORKSPACE  /  OVERVIEW</small><strong>{t.systemTitle}</strong></span><span className="p2-dash-pill">{t.systemSubtitle}</span></div>
                   <div className="p2-dash-metrics">
-                    <div><small>{t.mockTasks}</small><strong>08</strong><span>↗ WORKFLOW</span></div>
-                    <div><small>{t.mockActive}</small><strong>03</strong><span>● MONITORED</span></div>
+                    <div><small>{t.mockTasks}</small><strong>—</strong><span>↗ WORKFLOW</span></div>
+                    <div><small>{t.mockActive}</small><strong>—</strong><span>● MONITORED</span></div>
                   </div>
                   <div className="p2-dash-approval"><div className="p2-approval-icon"><ShieldCheck size={22}/></div><div><small>PERMISSION GATE</small><strong>{t.mockApproval}</strong><span>Outbound tool execution</span></div><b>{t.mockAllow} ↗</b></div>
                   <div className="p2-dash-pipeline"><small>{t.mockPipeline}</small><div><span><Check size={11}/>{t.mockInput}</span><i/><span><Check size={11}/>{t.mockPlan}</span><i/><span className="is-gated">● {t.mockGate}</span><i/><span>{t.mockExecution}</span></div></div>
