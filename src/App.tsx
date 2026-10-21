@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { ArrowDownRight, ArrowUpRight, Check, Download, Mail, Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { experience, experienceEs, profile, signals, signalsEs, skills, skillsEs } from './data/profile';
+import AgentCaseStudy from './AgentCaseStudy';
 
 type Language = 'en' | 'es';
 const LanguageContext = createContext<{ language: Language; setLanguage: (language: Language) => void }>({ language: 'en', setLanguage: () => undefined });
@@ -167,7 +168,7 @@ function Home() {
         <div className="signal-list">
           {displayedSignals.map(signal => <Reveal className="signal" key={signal.name}>
             <span className="signal-number">{signal.number}</span>
-            <div className="signal-name">{signal.name}<small>{signal.label}</small></div>
+            <div className="signal-name">{signal.number === '03' ? <Link to="/work/agent-platform" style={{textDecoration:'underline',textUnderlineOffset:4}}>{signal.name} ↗</Link> : signal.name}<small>{signal.label}</small></div>
             <h3>{signal.title}</h3>
             <p>{signal.body}</p>
             <ArrowUpRight className="signal-arrow" size={20}/>
@@ -228,6 +229,7 @@ function Home() {
               <span>03 / {es ? 'Aprobaciones humanas · permisos' : 'Human approvals · permissions'}</span>
               <span>04 / {es ? 'Ejecución trazable para trabajo autónomo controlado' : 'Traceable execution for controlled autonomous work'}</span>
             </div>
+            <Link className="button button-light" style={{ marginTop: '24px' }} to="/work/agent-platform">{es ? 'Ver caso técnico completo' : 'View technical case study'} <ArrowUpRight size={15}/></Link>
           </div>
         </div>
       </section>
@@ -428,17 +430,22 @@ export default function App() {
 
   useEffect(() => {
     const onResume = location.pathname === '/resume';
+    const onAgentCase = location.pathname === '/work/agent-platform';
     const title = onResume
       ? `Ulises Frías — ${language === 'es' ? 'CV · AI Deployment' : 'Résumé · AI Deployment'}`
-      : 'Ulises Frías — AI Deployment · Agentic Systems · Product';
+      : onAgentCase
+        ? `Ulises Frías — ${language === 'es' ? 'Caso técnico · Sistemas agénticos' : 'Case Study · Governed AI Agent Systems'}`
+        : 'Ulises Frías — AI Deployment · Agentic Systems · Product';
     const description = language === 'es'
       ? 'Constructor de AI deployment y fundador: customer discovery, workflow mapping, arquitectura de soluciones, sistemas agénticos y entrega customer-facing.'
       : 'AI deployment builder and founder: customer discovery, workflow mapping, solution architecture, agentic systems and customer-facing delivery.';
     document.title = title;
-    document.querySelector('meta[name="description"]')?.setAttribute('content', description);
+    document.querySelector('meta[name="description"]')?.setAttribute('content', onAgentCase
+      ? (language === 'es' ? 'Caso técnico de I+D: control de autoridad, agentes de IA, aprobaciones humanas y ejecución verificable.' : 'Engineering case study: AI agent orchestration, governed authority, human approvals and evidence-backed execution.')
+      : description);
   }, [language, location.pathname]);
 
   return <LanguageContext.Provider value={{ language, setLanguage }}>
-    {location.pathname === '/resume' ? <Resume/> : <Home/>}
+    {location.pathname === '/resume' ? <Resume/> : location.pathname === '/work/agent-platform' ? <><Header/><AgentCaseStudy language={language}/><Footer/></> : <Home/>}
   </LanguageContext.Provider>;
 }
