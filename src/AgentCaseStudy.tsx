@@ -1,6 +1,7 @@
 import { ArrowLeft, ArrowRight, ArrowUpRight, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { profile } from './data/profile';
+import AgentWorkflowDemo from './AgentWorkflowDemo';
 import './agent-case-study.css';
 
 type Language = 'en' | 'es';
@@ -129,6 +130,7 @@ export default function AgentCaseStudy({ language }: { language: Language }) {
         </div>
       )}</div>
     </section>
+    <AgentWorkflowDemo language={language} />
     <section className="study-section section-pad">
       <p className="study-kicker">{t.decisionsTag}</p>
       <div className="study-columns"><h2>{t.decisionsTitle}</h2>
