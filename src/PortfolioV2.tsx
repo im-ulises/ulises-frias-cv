@@ -43,7 +43,7 @@ const translations = {
     expEyebrow: '03 / EXPERIENCE', expTitle: 'Built across disciplines.', expIntro: 'A background that crosses AI engineering, product, commercial delivery and creative production.',
     skillsEyebrow: 'CORE TOOLKIT', skills: ['Python / FastAPI', 'TypeScript', 'REST APIs / MCP', 'Agent orchestration', 'Human approvals', 'Solution architecture', 'Customer discovery', 'Product delivery'],
     contactEyebrow: '04 / LET’S WORK', contactTitleA: 'Have a difficult', contactTitleB: 'problem?', contactText: 'I like the work where technical execution meets messy reality. Open to AI Deployment, Forward Deployed Engineering and Solutions roles.',
-    emailButton: 'Start a conversation', contactCode2: 'Explore GitHub',
+    emailButton: 'Start a conversation', contactGithub: 'Explore GitHub',
     footLocation: 'Based in Mexico · English / Spanish', footTop: 'Back to top',
   },
   es: {
@@ -81,7 +81,7 @@ const translations = {
     expEyebrow: '03 / EXPERIENCIA', expTitle: 'Experiencia multidisciplinaria.', expIntro: 'Una trayectoria que conecta ingeniería de IA, producto, trabajo comercial y producción creativa.',
     skillsEyebrow: 'HERRAMIENTAS Y CAPACIDADES', skills: ['Python / FastAPI', 'TypeScript', 'REST APIs / MCP', 'Orquestación de agentes', 'Aprobaciones humanas', 'Arquitectura de soluciones', 'Discovery con clientes', 'Entrega de producto'],
     contactEyebrow: '04 / HABLEMOS', contactTitleA: '¿Tienes un problema', contactTitleB: 'difícil?', contactText: 'Me gusta construir donde la tecnología se encuentra con operaciones reales. Abierto a AI Deployment, Forward Deployed Engineering y Solutions.',
-    emailButton: 'Iniciar conversación', contactCode2: 'Ver GitHub',
+    emailButton: 'Iniciar conversación', contactGithub: 'Ver GitHub',
     footLocation: 'México · Inglés / Español', footTop: 'Volver arriba',
   },
 };
@@ -230,7 +230,7 @@ export default function PortfolioV2({ language, setLanguage }: Props) {
       </section>
 
       <section className="p2-contact" id="contact">
-        <div className="p2-container"><div className="p2-kicker light"><span className="p2-kicker-square"/> {t.contactEyebrow}</div><h2>{t.contactTitleA}<br/><em>{t.contactTitleB}</em></h2><div className="p2-contact-bottom"><p>{t.contactText}</p><a href={'mailto:'+profile.email} className="p2-contact-button">{t.emailButton}<ArrowUpRight size={26}/></a></div><div className="p2-contact-links"><a href={profile.github} target="_blank" rel="noreferrer"><Code2 size={16}/>{t.contactCode2}<ArrowUpRight size={14}/></a><a href={profile.linkedin} target="_blank" rel="noreferrer"><BriefcaseBusiness size={16}/>LinkedIn<ArrowUpRight size={14}/></a><Link to="/resume"><Download size={16}/>{t.cv}<ArrowUpRight size={14}/></Link></div></div>
+        <div className="p2-container"><div className="p2-kicker light"><span className="p2-kicker-square"/> {t.contactEyebrow}</div><h2>{t.contactTitleA}<br/><em>{t.contactTitleB}</em></h2><div className="p2-contact-bottom"><p>{t.contactText}</p><a href={'mailto:'+profile.email} className="p2-contact-button">{t.emailButton}<ArrowUpRight size={26}/></a></div><div className="p2-contact-links"><a href={profile.github} target="_blank" rel="noreferrer"><Code2 size={16}/>{t.contactGithub}<ArrowUpRight size={14}/></a><a href={profile.linkedin} target="_blank" rel="noreferrer"><BriefcaseBusiness size={16}/>LinkedIn<ArrowUpRight size={14}/></a><Link to="/resume"><Download size={16}/>{t.cv}<ArrowUpRight size={14}/></Link></div></div>
       </section>
     </main>
 
