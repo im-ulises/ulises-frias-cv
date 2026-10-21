@@ -112,6 +112,7 @@ export default function AgentCaseStudy({ language }: { language: Language }) {
       <div className="study-eyebrow">{t.label}</div>
       <h1>{t.title}</h1>
       <p className="study-lede">{t.intro}</p>
+      <a className="study-jump" href="#demo">{language === 'es' ? 'Probar demo interactiva' : 'Try interactive walkthrough'} <ArrowRight size={17} /></a>
       <div className="study-facts">{t.facts.map((fact, i) => <div key={fact}><small>{t.roles[i]}</small><strong>{fact}</strong></div>)}</div>
     </section>
     <div className="study-statement section-pad"><ShieldCheck size={35} aria-hidden="true"/><p>{t.quote}</p></div>
