@@ -307,3 +307,6 @@
   .p2-sculpture-index{font-size:75px}
 }
 @media(max-width:390px){.p2-hero-image{height:390px;min-height:390px}.p2-sculpture-core>span{font-size:88px}}
+
+/* Preserve readable word boundaries at oversized display sizes. */
+.p2-hero h1,.p2-crobi-details h3,.p2-secondary-content h3{word-spacing:.09em}
