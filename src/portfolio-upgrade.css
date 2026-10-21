@@ -1,0 +1,33 @@
+/* Recruiter-first portfolio additions, informed by Mobbin website/profile references. */
+.proof-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid var(--ink);border-bottom:1px solid var(--line);padding-top:24px;padding-bottom:24px}
+.proof-tile{display:flex;align-items:flex-start;gap:19px;padding:0 30px;border-right:1px solid var(--line)}
+.proof-tile:first-child{padding-left:0}.proof-tile:last-child{border-right:0}
+.proof-tile strong{font-size:clamp(34px,4.1vw,66px);letter-spacing:-.08em;line-height:.86;font-weight:500;white-space:nowrap}
+.proof-tile span{font-size:11px;line-height:1.45;color:var(--muted);max-width:205px}
+.signal-arrow-link{grid-column:4;grid-row:1;justify-self:end;display:inline-flex;padding:7px;margin:-7px;color:var(--accent);border-radius:50%;transition:background .2s ease}
+.signal-arrow-link:hover,.signal-arrow-link:focus-visible{background:rgba(23,105,255,.09);outline-offset:2px}
+.crobi-case{background:#171817;color:#f4f3ef;padding-top:28px;padding-bottom:clamp(90px,12vw,170px)}
+.crobi-case .eyebrow,.crobi-case .section-number{color:#a7aba5}.crobi-case .eyebrow-line{background:#a7aba5}
+.crobi-case-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(340px,.84fr);gap:clamp(50px,9vw,160px);align-items:center;margin-top:clamp(75px,9vw,130px)}
+.crobi-category{font-size:10px;letter-spacing:.15em;color:#a7aba5;font-weight:600}
+.crobi-case h2{font-size:clamp(78px,12vw,170px);letter-spacing:-.095em;line-height:.87;font-weight:500;margin:25px 0 30px}
+.crobi-case h2 em{color:#8baeff;font-style:normal}
+.crobi-lede{font-size:clamp(26px,3vw,43px);line-height:1.08;letter-spacing:-.04em;max-width:650px;margin:0 0 25px}
+.crobi-description{font-size:14px;color:#b3b7b1;line-height:1.55;max-width:480px;margin:0 0 30px}
+.crobi-contact{display:inline-flex;gap:14px;align-items:center;border:1px solid #d4d9d2;padding:12px 17px;font-size:12px;transition:background .2s,color .2s}
+.crobi-contact:hover{background:#f4f3ef;color:#171817}
+.crobi-system{border:1px solid #4b504a;background:#212421;padding:clamp(20px,3vw,35px)}
+.crobi-system-label{letter-spacing:.12em;font-size:10px;color:#a7aba5;border-bottom:1px solid #424741;padding-bottom:18px;margin-bottom:25px}
+.crobi-system-stage{display:flex;gap:20px;align-items:flex-start;border:1px solid #545951;padding:19px;background:#2b2e2a}
+.crobi-system-stage small{font-size:10px;color:#aeb8b1;padding-top:3px}
+.crobi-system-stage strong{font-size:17px;font-weight:500;display:block;line-height:1.25}
+.crobi-system-stage span{font-size:11px;color:#afb7ae;display:block;margin-top:8px}
+.crobi-gate{background:#e5ebde;color:#151815;border-color:#e5ebde}
+.crobi-gate small,.crobi-gate span{color:#515951}
+.crobi-system-connector{text-align:center;color:#8baeff;font-size:18px;line-height:1.5;padding:3px 0}
+.crobi-bottom{border-top:1px solid #4b504a;margin-top:75px;padding-top:16px;display:flex;justify-content:space-between;gap:20px;color:#a7aba5;font-size:10px;letter-spacing:.09em}
+.resume-downloads{display:flex;align-items:center;gap:18px}
+.resume-downloads>a{text-decoration:underline;text-underline-offset:4px}
+@media(max-width:900px){.proof-tile{gap:12px;padding:0 15px}.crobi-case-grid{grid-template-columns:1fr;gap:60px}.crobi-case-intro{max-width:740px}.crobi-system{max-width:650px;width:100%}}
+@media(max-width:760px){.proof-strip{grid-template-columns:1fr;padding-top:5px;padding-bottom:5px}.proof-tile,.proof-tile:first-child{border-right:0;border-bottom:1px solid var(--line);padding:18px 0;align-items:center}.proof-tile:last-child{border-bottom:0}.proof-tile strong{font-size:46px;min-width:85px}.proof-tile span{max-width:none;font-size:12px}.signal-arrow-link{grid-column:3;grid-row:1}.crobi-case-grid{margin-top:75px}.crobi-case h2{font-size:clamp(68px,17vw,100px)}.crobi-system{padding:17px}.crobi-system-stage{padding:15px}.crobi-system-stage strong{font-size:15px}.crobi-bottom{flex-direction:column;margin-top:40px}.resume-downloads{flex-wrap:wrap;justify-content:flex-end;gap:10px}.resume-downloads>a{font-size:10px}.resume-actions{gap:10px}}
+@media print{.proof-strip,.crobi-case{display:none!important}.resume-downloads{display:none!important}}
