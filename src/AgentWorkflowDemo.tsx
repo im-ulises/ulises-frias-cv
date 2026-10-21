@@ -102,7 +102,7 @@ export default function AgentWorkflowDemo({ language }: { language: Language }) 
   const finished = phase === 5;
   const effects = phase >= 4 && decision === 'approved' ? 1 : 0;
   const view = denied && finished ? t.denied : t.detail[phase];
-  const log = t.eventNames.slice(0, phase + 1).filter((_, i) => !(denied && i >= 4));
+  const log: string[] = t.eventNames.slice(0, phase + 1).filter((_, i) => !(denied && i >= 4));
   if (denied && finished) log.push(t.deniedEvent);
   if (phase === 5 && decision === 'approved') log[5] = t.eventNames[5];
 
